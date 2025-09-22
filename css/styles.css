@@ -3,65 +3,67 @@
 
 /* VARIABLES DE COLOR */
 :root {
-    /* Principales */
-    --btn: #A4FF07;
-    --btn-hover: #87d300;
-    /* un poco más oscuro para hover */
-    --bg: #ECEEF0;
-    --bg-alt: #ffffff;
-    /* fondo alternativo, ej. cards */
-    --text-primary: #1C2129;
-    --text-secondary: #5F5F5F;
-    --accent: #5BBB7D;
-    --accent-hover: #4FA56E;
-    /* un poco más oscuro para hover */
-    --border: #D3D6DA;
-    /* para bordes suaves */
-    --shadow: rgba(0, 0, 0, 0.08);
+  /* Principales */
+  --btn: #A4FF07;
+  --btn-hover: #80bb04;
+  --btn-other: #4E06E6;
+  --btn-other-hover: #704ffd;
+  /* un poco más oscuro para hover */
+  --bg: #ECEEF0;
+  --bg-alt: #ffffff;
+  /* fondo alternativo, ej. cards */
+  --text-primary: #1C2129;
+  --text-secondary: #5F5F5F;
+  --accent: #5BBB7D;
+  --accent-hover: #4FA56E;
+  /* un poco más oscuro para hover */
+  --border: #D3D6DA;
+  /* para bordes suaves */
+  --shadow: rgba(0, 0, 0, 0.08);
 
-    /* Estados */
-    --success: #28a745;
-    --warning: #ffc107;
-    --error: #dc3545;
-    --info: #17a2b8;
+  /* Estados */
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+  --info: #17a2b8;
 
-    /* Dark mode (puedes activarlo luego con prefers-color-scheme o una clase .dark) */
-    --bg-dark: #1C2129;
-    --bg-alt-dark: #2A2F36;
-    --text-primary-dark: #ECEEF0;
-    --text-secondary-dark: #C1C1C1;
-    --accent-dark: #7CDFA6;
-    --btn-dark: #9EE606;
-    --btn-hover-dark: #89C904;
+  /* Dark mode (puedes activarlo luego con prefers-color-scheme o una clase .dark) */
+  --bg-dark: #1C2129;
+  --bg-alt-dark: #2A2F36;
+  --text-primary-dark: #ECEEF0;
+  --text-secondary-dark: #C1C1C1;
+  --accent-dark: #7CDFA6;
+  --btn-dark: #9EE606;
+  --btn-hover-dark: #89C904;
 
-    /* Tamaños de fuente base */
-    --font-size-base: 16px;
-    /* tamaño del body */
-    --font-size-sm: 0.875rem;
-    /* 14px - texto secundario */
-    --font-size-md: 1rem;
-    /* 16px - párrafos */
-    --font-size-lg: 1.25rem;
-    /* 20px - subtítulos pequeños */
-    --font-size-xl: 1.5rem;
-    /* 24px - subtítulos */
-    --font-size-2xl: 2rem;
-    /* 32px - títulos grandes */
-    --font-size-3xl: 2.5rem;
-    /* 40px - títulos destacados */
-    --font-size-4xl: 3rem;
-    /* 48px - hero principal */
+  /* Tamaños de fuente base */
+  --font-size-base: 16px;
+  /* tamaño del body */
+  --font-size-sm: 0.875rem;
+  /* 14px - texto secundario */
+  --font-size-md: 1rem;
+  /* 16px - párrafos */
+  --font-size-lg: 1.25rem;
+  /* 20px - subtítulos pequeños */
+  --font-size-xl: 1.5rem;
+  /* 24px - subtítulos */
+  --font-size-2xl: 2rem;
+  /* 32px - títulos grandes */
+  --font-size-3xl: 2.5rem;
+  /* 40px - títulos destacados */
+  --font-size-4xl: 3rem;
+  /* 48px - hero principal */
 
-    /* Grosor de fuente */
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
+  /* Grosor de fuente */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
-    /* Altura de línea */
-    --line-height-normal: 1.5;
-    --line-height-tight: 1.2;
-    --line-height-loose: 1.7;
+  /* Altura de línea */
+  --line-height-normal: 1.5;
+  --line-height-tight: 1.2;
+  --line-height-loose: 1.7;
 }
 
 /* ==============================
@@ -81,28 +83,28 @@
 
 /* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* BASE */
 body,
 html {
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    font-size: var(--font-size-base);
-    background-color: var(--bg);
-    color: var(--text-primary);
-    line-height: var(--line-height-normal);
-    scroll-behavior: smooth;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--font-size-base);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+  scroll-behavior: smooth;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    /* asegura que ocupa toda la ventana */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* asegura que ocupa toda la ventana */
 }
 
 h1 {
@@ -121,7 +123,10 @@ h3 {
   font-weight: var(--font-weight-semibold);
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
   margin-bottom: 1rem;
 }
 
@@ -130,6 +135,7 @@ p {
   font-weight: var(--font-weight-normal);
   color: var(--text-secondary);
 }
+
 a {
   text-decoration: none;
   color: inherit;
@@ -148,18 +154,19 @@ ul {
   gap: 1.5rem;
   align-items: center;
 }
-
+/*
 .nav-login {
-  margin-left: 2rem; /* separación extra del menú */
+  margin-left: 2rem;
+   separación extra del menú 
   padding-left: 1rem;
 }
-
+*/
 /* ==============================
    BOTONES BASE
 ============================== */
 .btn {
   display: inline-block;
-  background: var(--btn);
+  background: var(--btn-other);
   color: var(--text-primary);
   padding: 0.5rem 1rem;
   border: none;
@@ -169,51 +176,12 @@ ul {
   cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   text-align: center;
-  text-decoration: none; /* para usar como <a> */
-}
-
-/* Botón primario (verde-lima) */
-.btn-primary {
-  background-color: var(--btn);
-  color: var(--text-primary);
-}
-.btn-primary:hover {
-  background-color: var(--btn-hover);
-  box-shadow: 0 4px 8px var(--shadow);
-}
-
-/* Botón acento (verde más suave) */
-.btn-accent {
-  background-color: var(--accent);
-  color: #fff;
-}
-.btn-accent:hover {
-  background-color: var(--accent-hover);
-  box-shadow: 0 4px 8px var(--shadow);
-}
-
-/* Botón de borde (outline) */
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--btn);
-  color: var(--btn);
-}
-.btn-outline:hover {
-  background: var(--btn);
-  color: var(--text-primary);
-}
-
-/* Botón deshabilitado */
-.btn:disabled,
-.btn[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
+  text-decoration: none;
+  /* para usar como <a> */
 }
 
 .btn:hover {
-  background: var(--btn-hover);
-  transform: translateY(-2px);
+  background: var(--btn-other-hover);
 }
 
 /* Dark mode */
@@ -226,32 +194,13 @@ ul {
   background: var(--btn-hover);
 }
 
-/* ==============================
-   Dark Mode (se activa con .dark)
-============================== */
-.dark .btn-primary {
-  background-color: var(--btn);
-  color: var(--text-primary-dark);
-}
-.dark .btn-primary:hover {
-  background-color: var(--btn-hover);
-}
-
-.dark .btn-accent {
-  background-color: var(--accent);
-  color: var(--text-primary-dark);
-}
-.dark .btn-accent:hover {
-  background-color: var(--accent-hover);
-}
-
-.dark .btn-outline {
-  border: 2px solid var(--btn);
-  color: var(--btn);
-}
-.dark .btn-outline:hover {
-  background: var(--btn);
-  color: var(--text-primary-dark);
+/* Botón Hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 
@@ -263,6 +212,8 @@ ul {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0.1rem 2rem;
+
+
 }
 
 /* Logo */
@@ -271,29 +222,34 @@ ul {
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
 }
+
 .logo span {
   color: var(--accent);
 }
 
 .logo img {
   height: 40px;
+  display: block;
   width: auto;
 }
 
 
-.nav-center {
+.nav-menu {
   flex: 1;
   display: flex;
   justify-content: center;
+  gap: 2rem;
+  margin: 0 auto;
 }
 
 /* Navegación */
 .nav-list {
   display: flex;
-  gap: 2rem; /* espacio entre enlaces */
+  gap: 2rem;
+  /* espacio entre enlaces */
 }
 
-.nav-center ul {
+.nav-menu ul {
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -314,25 +270,97 @@ ul {
 }
 
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--bg-alt);
+  z-index: 1000;
+}
 
 
 header,
 footer {
-    padding: 1rem;
-    background: var(--bg-alt);
+  padding: 1rem;
+  background: var(--bg-alt);
+
 }
 
 main {
-    flex: 1;
-    /* ocupa el espacio sobrante */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+  flex: 1;
+  /* ocupa el espacio sobrante */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem 2rem;
 }
 
 footer {
-    text-align: center;
-    color: var(--text-secondary);
+  text-align: center;
+  color: var(--text-secondary);
 }
 
+/* Nav normal (desktop) */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* --- RESPONSIVE (sidebar desde la derecha en columna) --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    z-index: 1100;
+    /* siempre encima */
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 78px;
+    left: -250px;
+    /* oculto fuera de pantalla */
+    width: auto;
+    height: 100vh;
+    /* ocupa toda la altura */
+    background: var(--bg-alt);;
+
+    /* 🔥 aquí lo importante */
+    display: flex;
+    flex-direction: column;
+    /* columnas (arriba-abajo) */
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    padding: 1.5rem 2rem;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+  }
+/*
+  .nav-login {
+    margin-left: 0rem; 
+    padding-left: 0rem; 
+  }*/
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .nav-menu a {
+    font-size: var(--font-size-lg);
+    width: 100%;
+  }
+
+  .btn-login {
+    width: auto;
+    text-align: center;
+  }
+}
