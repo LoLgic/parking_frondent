@@ -9,7 +9,7 @@
 :root {
   /* Principales */
   --btn: #A4FF07;
-  --btn-hover: #80bb04;
+  --btn-hover: #94d800;
   --btn-other: #4E06E6;
   --btn-other-hover: #704ffd;
 
@@ -186,6 +186,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
+  height: 78px;
   padding: 1rem 2rem;
   background: var(--bg-alt);
   z-index: 1000;
@@ -254,16 +255,86 @@ header {
 }
 
 /* ==============================
-   MAIN & FOOTER
+   MAIN
 ============================== */
 main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 6rem 2rem 2rem;
+  align-items: flex-start;
+  padding-top: 78px;
+ /* padding: 6rem 2rem 2rem;*/
 }
 
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+.hero {
+  background: url('../img/hero_bg_car.jpg') no-repeat center center/cover;
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--bg-alt);
+  /*margin-top: -120px;*/
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28, 33, 41, 0.65);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+}
+
+
+.hero h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 30px var(--bg-dark);
+  font-weight: var(--font-weight-bold);
+}
+
+.hero p {
+  font-size: var(--font-size-lg);
+  margin-bottom: 20px;
+  color: var(--bg-alt);
+  text-shadow: 1px 1px 10px var(--bg-dark);
+}
+
+.btn-hero {
+  display: inline-block;
+  background: var(--btn-hover);
+  color: #1C2129;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 30px;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.btn-hero:hover {
+  background: var(--btn);
+  transform: scale(1.05);
+  color: #1C2129;
+}
+
+
+/* ==============================
+  FOOTER
+============================== */
 footer {
   text-align: center;
   color: var(--text-secondary);
@@ -311,5 +382,46 @@ footer {
 
   .btn-login {
     width: auto;
+  }
+}
+/* ============================= */
+/* Responsive HERO */
+/* ============================= */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero {
+    height: 350px;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .btn-hero {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .hero {
+    height: 300px;
+    padding: 10px;
+  }
+  .hero-content {
+    padding: 15px;
+  }
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+  .hero p {
+    font-size: 0.9rem;
+  }
+  .btn-hero {
+    padding: 8px 18px;
+    font-size: 0.85rem;
   }
 }
