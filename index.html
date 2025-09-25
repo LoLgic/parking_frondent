@@ -7,6 +7,9 @@
     <title>Home</title>
     <link rel="stylesheet" href="css/styles.css">
 
+    <!-- Font Awesome (agregar en <head>) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -28,8 +31,6 @@
                     <li><a href="#about">acerca de</a></li>
                     <li><a href="#precio">Precios</a></li>
                     <li><a href="#contacto">Contactos</a></li>
-                    <li class="nav-login">
-                    </li>
                 </ul>
 
             </nav>
@@ -39,13 +40,62 @@
     <main>
 
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero" id="inicio">
+            <picture>
+                <!-- Imagen para pantallas grandes (desktop) -->
+                <source media="(min-width: 1024px)" srcset="img/hero_desktop.webp">
+                <!-- Imagen para tablets -->
+                <source media="(min-width: 600px)" srcset="img/hero_tablet.webp">
+                <!-- Imagen por defecto (mobile) -->
+                <img src="img/hero_mobile.webp" alt="Hero Parking" class="hero-img">
+            </picture>
+
             <div class="hero-content">
                 <h1>Encuentra, Reserva y Estaciona</h1>
-                <p>Tu vehículo seguro, con un par de clics</p>
+                <p>Tu espacio seguro y confiable para estacionar tu vehículo</p>
                 <a href="#reserva" class="btn-hero">Reserva Ahora</a>
             </div>
         </section>
+
+        <!-- Información Section -->
+        <section class="info" id="about">
+            <div class="container">
+                <h2 class="info-title">Reserva de Aparcamiento</h2>
+                <p class="info-description">
+                    Cuando estás de viaje, la aplicación gratuita ParkMobile te permite encontrar y pagar fácilmente
+                    el estacionamiento sin tener que volver corriendo para cargar el parquímetro. Y para mayor
+                    comodidad,
+                        puedes reservar plazas con antelación.
+                </p>
+
+
+                <h3>Información del Parqueadero</h3>
+                <!--clock, location, lock, thunder * ICON-->
+                <div class="info-cards">
+                    <div class="card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Ubicación</h3>
+                        <p>Calle 123 #45-67, Ciudad</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Horarios</h3>
+                        <p>Lunes a Domingo<br>6:00 AM - 11:00 PM</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Seguridad</h3>
+                        <p>Monitoreo 24/7 con cámaras y personal de seguridad</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-car-side"></i>
+                        <h3>Servicios Extra</h3>
+                        <p>Lavado, cargadores eléctricos y bahías para bicicletas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
     </main>
     <footer></footer>
