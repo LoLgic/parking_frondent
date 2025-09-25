@@ -353,6 +353,7 @@ main {
   border-radius: 30px;
   transition: 0.3s ease-in-out;
   text-decoration: none;
+  font-size: var(--font-size-lg);
 }
 
 .btn-hero:hover {
@@ -457,17 +458,41 @@ footer {
   padding: 1rem;
 }
 
-/* ==============================
-   RESPONSIVE
-============================== */
+/* ============================= */
+/* Responsive HEADER             */
+/* ============================= */
+/* Tablets */
+@media (max-width: 1024px) {
+  header {
+    height: 70px;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .logo {
+    font-size: var(--font-size-lg); /* 20px */
+  }
+
+  .nav-list a {
+    font-size: var(--font-size-sm); /* 14px */
+  }
+
+  .btn-login {
+    font-size: var(--font-size-sm); /* 14px */ 
+    padding: 6px 14px;
+    margin: 0 27px;
+  }
+}
+
+/* Móviles */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
+    font-size: var(--font-size-xl); /* 24px */
   }
 
   .nav-menu {
     position: fixed;
-    top: 78px;
+    top: 70px;
     left: -250px;
     width: 180px;
     height: 100vh;
@@ -491,12 +516,14 @@ footer {
   }
 
   .nav-list a {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md); /* 16px */
     width: 100%;
   }
 
   .btn-login {
-    width: auto;
+    font-size: var(--font-size-sm); /* 14px */
+    padding: 6px 12px;
+    margin: 0 14px;
   }
 }
 
@@ -505,50 +532,49 @@ footer {
 /* ============================= */
 
 /* Tablets */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .hero {
-    height: 350px;
+    height: 360px;
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl); /* 2.5rem ≈ 40px */
   }
 
   .hero p {
-    font-size: 1rem;
+    font-size: var(--font-size-md); /* 1rem ≈ 16px */
   }
 
   .btn-hero {
-    padding: 10px 20px;
-    font-size: 0.95rem;
+    padding: 10px 22px;
+    font-size: var(--font-size-md); /* 0.875rem ≈ 14px */
   }
 }
 
 /* Móviles */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .hero {
     height: 300px;
-    padding: 10px;
+    padding: 12px;
   }
 
   .hero-content {
-    padding: 15px;
+    padding: 10px;
   }
 
   .hero h1 {
-    font-size: 1.6rem;
+    font-size: var(--font-size-xl); /* 2rem ≈ 32px */
   }
 
   .hero p {
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm); /* 0.875rem ≈ 14px */
   }
 
   .btn-hero {
     padding: 8px 18px;
-    font-size: 0.85rem;
+    font-size: var(--font-size-sm); /* consistente en mobile */
   }
 }
-
 
 /* ============================= */
 /* Responsive INFO */
