@@ -142,9 +142,9 @@ a {
   transition: color 0.2s ease;
 }
 
-a:hover {
+/*a:hover {
   color: var(--accent);
-}
+}*/
 
 ul {
   list-style: none;
@@ -332,16 +332,21 @@ main {
 
 .hero h1 {
   font-size: var(--font-size-4xl);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   text-shadow: 1px 1px 30px var(--bg-dark);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 4rem;
+  /*letter-spacing: 0.1rem;
+  line-height: 2.5rem;*/
 }
 
 .hero p {
   font-size: var(--font-size-lg);
   margin-bottom: 20px;
-  color: var(--bg-alt);
+  color: var(--bg);
   text-shadow: 1px 1px 10px var(--bg-dark);
+  font-weight: var(--font-weight-normal);
+  /*letter-spacing: 0.1rem;*/
 }
 
 .btn-hero {
@@ -365,7 +370,8 @@ main {
 /* INFO */
 .info {
   width: 100%;
-  padding: 3.3rem 4rem;
+  /*padding: 3.3rem 4rem;*/
+  padding: 3rem 4rem 2rem 4rem;
   background: var(--bg);
   text-align: center;
   display: block;
@@ -447,6 +453,131 @@ main {
   margin-bottom: 0.5rem;
 }
 
+/* ============================= */
+/* PRECIOS SECTION               */
+/* ============================= */
+.precios {
+  padding: 3rem 2rem;
+  background: #fff;
+  text-align: center;
+}
+
+.precios-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  color: var(--text-primary);
+}
+
+/* Cards de precios */
+.precios-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.precios-card {
+  background: var(--bg-alt);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.precios-card:hover {
+  transform: translateY(-5px);
+}
+
+.precios-card i {
+  width: 50px;
+  font-size: var(--font-size-xl);
+  margin-bottom: 1rem;
+}
+
+.precios-card h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: 0.5rem;
+}
+
+.precio {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+  color: var(--bg-alt-dark);
+}
+
+/* Beneficios */
+.precios-beneficios {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.precios-beneficios h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: 2rem;
+}
+
+.precios-beneficios span {
+  color: var(--accent);
+}
+
+
+.cards-beneficios {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.beneficio {
+  max-width: 220px;
+  text-align: center;
+}
+
+.beneficio img {
+  width: 90px;
+  margin-bottom: 1rem;
+}
+
+.beneficio h4 {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.beneficio p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+
+/* Botón */
+.btn-join {
+  background: #ffd51d;
+  color: #000;
+  font-weight: 600;
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all ease .50s;
+}
+
+.btn-join:hover {
+  background: #ffe11f;
+  transform: scale(1.05);
+}
+
+
+
+
 
 /* ==============================
   FOOTER
@@ -454,8 +585,76 @@ main {
 footer {
   text-align: center;
   color: var(--text-secondary);
-  background: var(--bg-alt);
+  background: var(--bg-dark);
   padding: 1rem;
+}
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+/* Logo */
+.footer-logo {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-logo span {
+  color: var(--accent);
+}
+
+/* Links */
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  font-size: var(--font-size-md);
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* Redes sociales */
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.footer-social a {
+  font-size: var(--font-size-xl);
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--accent);
+}
+
+/* Parte inferior */
+.footer-bottom {
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+}
+
+.footer-bottom p {
+  font-size: var(--font-size-sm);
+  color: #ccc;
 }
 
 /* ============================= */
@@ -469,15 +668,18 @@ footer {
   }
 
   .logo {
-    font-size: var(--font-size-lg); /* 20px */
+    font-size: var(--font-size-lg);
+    /* 20px */
   }
 
   .nav-list a {
-    font-size: var(--font-size-sm); /* 14px */
+    font-size: var(--font-size-sm);
+    /* 14px */
   }
 
   .btn-login {
-    font-size: var(--font-size-sm); /* 14px */ 
+    font-size: var(--font-size-sm);
+    /* 14px */
     padding: 6px 14px;
     margin: 0 27px;
   }
@@ -487,7 +689,8 @@ footer {
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
-    font-size: var(--font-size-xl); /* 24px */
+    font-size: var(--font-size-xl);
+    /* 24px */
   }
 
   .nav-menu {
@@ -503,6 +706,7 @@ footer {
     gap: 1.5rem;
     padding: 1.5rem 2rem;
     transition: left 0.3s ease-in-out;
+
   }
 
   .nav-menu.active {
@@ -516,12 +720,14 @@ footer {
   }
 
   .nav-list a {
-    font-size: var(--font-size-md); /* 16px */
+    font-size: var(--font-size-md);
+    /* 16px */
     width: 100%;
   }
 
   .btn-login {
-    font-size: var(--font-size-sm); /* 14px */
+    font-size: var(--font-size-sm);
+    /* 14px */
     padding: 6px 12px;
     margin: 0 14px;
   }
@@ -538,16 +744,19 @@ footer {
   }
 
   .hero h1 {
-    font-size: var(--font-size-2xl); /* 2.5rem ≈ 40px */
+    font-size: var(--font-size-2xl);
+    /* 2.5rem ≈ 40px */
   }
 
   .hero p {
-    font-size: var(--font-size-md); /* 1rem ≈ 16px */
+    font-size: var(--font-size-md);
+    /* 1rem ≈ 16px */
   }
 
   .btn-hero {
     padding: 10px 22px;
-    font-size: var(--font-size-md); /* 0.875rem ≈ 14px */
+    font-size: var(--font-size-md);
+    /* 0.875rem ≈ 14px */
   }
 }
 
@@ -563,16 +772,19 @@ footer {
   }
 
   .hero h1 {
-    font-size: var(--font-size-xl); /* 2rem ≈ 32px */
+    font-size: var(--font-size-xl);
+    /* 2rem ≈ 32px */
   }
 
   .hero p {
-    font-size: var(--font-size-sm); /* 0.875rem ≈ 14px */
+    font-size: var(--font-size-sm);
+    /* 0.875rem ≈ 14px */
   }
 
   .btn-hero {
     padding: 8px 18px;
-    font-size: var(--font-size-sm); /* consistente en mobile */
+    font-size: var(--font-size-sm);
+    /* consistente en mobile */
   }
 }
 
@@ -587,7 +799,8 @@ footer {
   }
 
   .info-title {
-    font-size: var(--font-size-2xl); /* bajar un nivel */
+    font-size: var(--font-size-2xl);
+    /* bajar un nivel */
   }
 
   .info-description {
@@ -601,7 +814,8 @@ footer {
   }
 
   .info-cards {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columnas en tablet */
     gap: 1.5rem;
   }
 
@@ -638,6 +852,7 @@ footer {
     margin-bottom: 2rem;
     padding: 0 1.3rem;
     text-align: left;
+    line-height: 1.5rem;
   }
 
   .info h3 {
@@ -645,7 +860,8 @@ footer {
   }
 
   .info-cards {
-    grid-template-columns: 1fr; /* 1 columna en móvil */
+    grid-template-columns: 1fr;
+    /* 1 columna en móvil */
     gap: 1.2rem;
     padding: 0 1rem 1.5rem;
   }
@@ -656,7 +872,8 @@ footer {
   }
 
   .card i {
-    font-size: var(--font-size-xl); /* íconos más grandes para mobile */
+    font-size: var(--font-size-xl);
+    /* íconos más grandes para mobile */
     margin-bottom: 0.5rem;
   }
 
@@ -667,5 +884,33 @@ footer {
   .card p {
     font-size: var(--font-size-sm);
     padding: 0 4rem;
+    line-height: 1rem;
+  }
+}
+
+/* Responsive precios */
+@media (max-width: 768px) {
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .benefits-cards {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+/* ============================= */
+/* Responsive Footer */
+/* ============================= */
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-social {
+    justify-content: center;
   }
 }

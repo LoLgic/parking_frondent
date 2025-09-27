@@ -17,7 +17,7 @@
     <header>
         <div class="header-container">
             <!-- Logo -->
-            <a href="#" class="logo">Parking<span>Virtual</span></a>
+            <a href="index.html" class="logo">Park<span>ea</span></a>
             <!--<img src="assets/img/logo.png" alt="Logo Parking">-->
 
             <button class="menu-toggle" aria-label="Abrir menú">
@@ -29,12 +29,12 @@
                 <ul class="nav-list">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#about">acerca de</a></li>
-                    <li><a href="#precio">Precios</a></li>
+                    <li><a href="#precios">Precios</a></li>
                     <li><a href="#contacto">Contactos</a></li>
                 </ul>
 
             </nav>
-            <a href="#login" class="btn btn-login" style="color: #fff;">Login</a>
+            <a href="login.html" class="btn btn-login" style="color: #fff;">Login</a>
         </div>
     </header>
     <main>
@@ -47,7 +47,7 @@
                 <!-- Imagen para tablets -->
                 <source media="(min-width: 600px)" srcset="img/hero_tablet.webp">
                 <!-- Imagen por defecto (mobile) -->
-                <img src="img/hero_mobile.webp" alt="Hero Parking" class="hero-img">
+                <img src="img/hero_mobile_0.webp" alt="Hero Parking" class="hero-img">
             </picture>
 
             <div class="hero-content">
@@ -97,8 +97,90 @@
         </section>
 
 
+        <section class="precios" id="precios">
+            <h2 class="precios-title">Tarifas de Estacionamiento</h2>
+
+            <div class="precios-cards">
+                <!-- Carro -->
+                <div class="precios-card">
+                    <i class="fas fa-car-side"></i>
+                    <h3>Carro</h3>
+                    <p class="precio">$3.000</p>
+                </div>
+
+                <!-- Moto -->
+                <div class="precios-card">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <h3>Moto</h3>
+                    <p class="precio">$2.500</p>
+                </div>
+
+                <!-- Bicicleta -->
+                <div class="precios-card">
+                    <i class="fa-solid fa-bicycle"></i>
+                    <h3>Bicicleta</h3>
+                    <p class="precio">$2.000</p>
+                </div>
+            </div>
+
+            <!-- Franja de beneficios -->
+            <div class="precios-beneficios">
+                <h3>Únase a Park<span>ea</span> Y ahorre en el acto.</h3>
+
+                <div class="cards-beneficios">
+                    <div class="beneficio">
+                        <img src="img/free_car.svg" alt="Estacionamiento gratis">
+                        <h4>Gana estacionamiento gratis</h4>
+                        <p>Cuanto más aparcas, más ahorras.</p>
+                    </div>
+
+                    <div class="beneficio">
+                        <img src="img/qr.svg" alt="Entrada rápida">
+                        <h4>Entrada y salida más rápida</h4>
+                        <p>Ahorre tiempo entrando y saliendo con nuestra aplicación.</p>
+                    </div>
+
+                    <div class="beneficio">
+                        <img src="img/descuento_oferta.svg" alt="Descuentos">
+                        <h4>Descuentos y ofertas</h4>
+                        <p>Obtenga acceso a ofertas exclusivas para miembros.</p>
+                    </div>
+                </div>
+
+                <button class="btn-join">Únete gratis</button>
+            </div>
+        </section>
+
+
+
     </main>
-    <footer></footer>
+    <footer>
+        <div class="footer-container" id="contacto">
+            <!-- Logo o Nombre -->
+            <a href="#" class="footer-logo">Park<span>ea</span></a>
+
+            <!-- Navegación rápida -->
+            <ul class="footer-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#about">Acerca de</a></li>
+                <li><a href="#precio">Precios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+
+            <!-- Redes Sociales -->
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+
+        <!-- Derechos -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Parkea. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <script src="js/main.js"></script>
 </body>
