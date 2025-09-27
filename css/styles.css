@@ -62,7 +62,7 @@
 
   --line-height-normal: 1.5;
   --line-height-tight: 1.2;
-  --line-height-loose: 1.7;
+  --line-height-loose: 1.6;
 }
 
 /* ==============================
@@ -171,11 +171,16 @@ ul {
   background: var(--btn-hover);
 }
 
+.btn-login-container {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  text-align: center;
+}
+
 .btn-login {
   background: var(--btn-other);
   color: #fff;
-  margin: 0 52.665px;
-  /*margin-left: 105.330px; */
 }
 
 .btn-login:hover {
@@ -205,7 +210,7 @@ header {
   background: var(--bg);
   z-index: 1000;
   box-shadow: 0 2px 4px var(--shadow);
-  border-bottom: var(--bg-dark) 0.3rem solid;
+  border-bottom: var(--bg-alt-dark) 0.3rem solid;
 }
 
 .header-container {
@@ -222,6 +227,8 @@ header {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
+  width: 100px;
+  text-align: center;
 }
 
 .logo span {
@@ -461,29 +468,62 @@ main {
   background: #fff;
   text-align: center;
 }
+/*
+.precios-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}*/
 
 .precios-title {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-semibold);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   margin-top: 2rem;
   color: var(--text-primary);
 }
 
+.precios-descripcion {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  line-height: var(--line-height-loose);
+  text-align: left;
+}
+
 /* Cards de precios */
+
+/* Card padre 
+
+
+.precios-wrapper {
+  background: var(--bg-alt-dark);
+  border-radius: 5px;
+  padding: 2rem;
+  margin: 0 auto 3rem auto;
+  max-width: 900px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+} */
+
 .precios-cards {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3rem;
   flex-wrap: wrap;
 }
 
 .precios-card {
-  background: var(--bg-alt);
+  background: #f4f6fa;
   border-radius: 12px;
-  padding: 1.5rem;
-  width: 200px;
+  padding: 1rem;
+  height: 160px;
+  width: 250px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
@@ -493,14 +533,27 @@ main {
 }
 
 .precios-card i {
-  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f4f6fa;
+  width: 100px;
+  height: 50px;
+  margin: 0 auto 1rem auto;
   font-size: var(--font-size-xl);
-  margin-bottom: 1rem;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-align: center;
+  background: var(--btn-other-hover);
+  border-radius: 25px;
 }
 
 .precios-card h3 {
   font-size: var(--font-size-lg);
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
+}
+.precios-card p {
+  margin-bottom: 5px;
 }
 
 .precio {
@@ -852,7 +905,6 @@ footer {
     margin-bottom: 2rem;
     padding: 0 1.3rem;
     text-align: left;
-    line-height: 1.5rem;
   }
 
   .info h3 {
@@ -913,4 +965,12 @@ footer {
   .footer-social {
     justify-content: center;
   }
+
+  .footer-links a {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+  }
+
+  
+  
 }

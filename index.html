@@ -34,7 +34,9 @@
                 </ul>
 
             </nav>
-            <a href="login.html" class="btn btn-login" style="color: #fff;">Login</a>
+            <div class="btn-login-container">
+                <a href="login.html" class="btn btn-login" style="color: #fff;">Login</a>
+            </div>
         </div>
     </header>
     <main>
@@ -47,7 +49,7 @@
                 <!-- Imagen para tablets -->
                 <source media="(min-width: 600px)" srcset="img/hero_tablet.webp">
                 <!-- Imagen por defecto (mobile) -->
-                <img src="img/hero_mobile_0.webp" alt="Hero Parking" class="hero-img">
+                <img src="img/hero_mobile.webp" alt="Hero Parking" class="hero-img">
             </picture>
 
             <div class="hero-content">
@@ -62,9 +64,8 @@
             <div class="container">
                 <h2 class="info-title">Reserva de Aparcamiento</h2>
                 <p class="info-description">
-                    Cuando estás de viaje, la aplicación gratuita ParkMobile te permite encontrar y pagar fácilmente
-                    el estacionamiento sin tener que volver corriendo para cargar el parquímetro. Y para mayor
-                    comodidad,
+                    Cuando estás de viaje, la aplicación gratuita ParkMobile te permite encontrar y pagar fácilmente el
+                    estacionamiento sin tener que volver corriendo para cargar el parquímetro. Y para mayor comodidad,
                     puedes reservar plazas con antelación.
                 </p>
 
@@ -99,29 +100,35 @@
 
         <section class="precios" id="precios">
             <h2 class="precios-title">Tarifas de Estacionamiento</h2>
+            <p class="precios-descripcion">
+                Nuestras tarifas están diseñadas para ofrecerte comodidad y seguridad al mejor costo.
+                Cada precio corresponde a una hora de estacionamiento según el tipo de vehículo.
+            </p>
 
-            <div class="precios-cards">
-                <!-- Carro -->
-                <div class="precios-card">
-                    <i class="fas fa-car-side"></i>
-                    <h3>Carro</h3>
-                    <p class="precio">$3.000</p>
-                </div>
+            <!-- <div class="precios-wrapper"> -->
+                <div class="precios-cards">
+                    <!-- Carro -->
+                    <div class="precios-card">
+                        <i class="fas fa-car-side"></i>
+                        <h3>Carro</h3>
+                        <p class="precio">$3.000 x Hora</p>
+                    </div>
 
-                <!-- Moto -->
-                <div class="precios-card">
-                    <i class="fa-solid fa-motorcycle"></i>
-                    <h3>Moto</h3>
-                    <p class="precio">$2.500</p>
-                </div>
+                    <!-- Moto -->
+                    <div class="precios-card">
+                        <i class="fa-solid fa-motorcycle"></i>
+                        <h3>Moto</h3>
+                        <p class="precio">$2.500 x Hora</p>
+                    </div>
 
-                <!-- Bicicleta -->
-                <div class="precios-card">
-                    <i class="fa-solid fa-bicycle"></i>
-                    <h3>Bicicleta</h3>
-                    <p class="precio">$2.000</p>
+                    <!-- Bicicleta -->
+                    <div class="precios-card">
+                        <i class="fa-solid fa-bicycle"></i>
+                        <h3>Bicicleta</h3>
+                        <p class="precio">$2.000 x Hora</p>
+                    </div>
                 </div>
-            </div>
+            <!--</div> -->
 
             <!-- Franja de beneficios -->
             <div class="precios-beneficios">
