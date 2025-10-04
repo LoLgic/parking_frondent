@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+  
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/registro.css">
+  
+  
+
+  
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="logo" aria-label="Ir al inicio">Park<span>ea</span></a>
+
+      <!-- Botón/Enlace de Login -->
+      <a href="login.html" class="btn btn-login" aria-label="Iniciar sesión">Login</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="registro-card">
+      <!-- Columna izquierda (formulario) -->
+      <div class="registro-left">
+        <h2>Crea tu Cuenta</h2>
+        <p>Por favor completa la información para crear tu cuenta.</p>
+
+        <form class="registro-form" id="registerForm">
+          <div class="form-row">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="apellido" placeholder="Apellido" required>
+          </div>
+          <input type="text" id="celular" placeholder="Celular" required>
+          <input type="email" id="email" placeholder="Email" required>
+          <input type="password" id="clave" placeholder="Clave" required>
+          <input type="password" id="confirmar" placeholder="Confirmar clave" required>
+
+          <button type="submit" class="btn-registrar">Registrarse</button>
+
+          <p class="texto-secundario">
+            ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a>
+          </p>
+        </form>
+        <!-- Mensajes de validación -->
+        <p id="mensajeError" style="color: red; margin-top: 10px;"></p>
+      </div>
+
+      <!-- Columna derecha (imagen) -->
+      <div class="registro-right">
+        <img src="img/car_bg.webp" alt="Imagen decorativa de parqueadero">
+      </div>
+
+      <!-- Modal de éxito (oculto por defecto) -->
+      <div id="successModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content" role="document">
+          <h2>Registro exitoso!</h2>
+          <p>Tu cuenta ha sido creada correctamente.</p>
+          <button id="continueBtn" class="btn-registrar">Continuar</button>
+        </div>
+      </div>
+
+    </section>
+    
+  </main>
+
+
+
+  <script src="js/registro.js"></script>
+</body>
+
+</html>

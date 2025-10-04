@@ -1,0 +1,165 @@
+/* Main centrado */
+main {
+  /*min-height: calc(100vh - 78px - 60px); /* ocupa toda la pantalla menos header y footer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin-top: 4rem;
+}
+
+/* Card principal */
+.registro-card {
+  width: 1000px;
+  height: 550px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 5px 20px 50px var(--text-secondary-dark);
+  display: flex;
+  overflow: hidden;
+}
+
+/* Columna izquierda (formulario) */
+.registro-left {
+  width: 400px;
+  height: 100%;
+  background: #f5f5f5; /* gris claro */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.registro-left h2 {
+  color: var( --text-primary);
+  margin-bottom: 0.5rem;
+  width: 300px;
+}
+
+.registro-left p {
+  width: 300px;
+  font-size: var(--font-size-sm);
+  
+}
+
+/* Formulario */
+.registro-form input {
+  display: block;
+  width: 300px;
+  height: 40px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+
+}
+.form-row input {
+  width: 145px;
+}
+
+/* Botón */
+.btn-registrar {
+  font-size: var(--font-size-md);
+  width: 300px;
+  height: 40px;
+  background: var(--btn-other);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-registrar:hover {
+  background: var(--btn-other-hover);
+}
+
+/* Texto secundario */
+.texto-secundario {
+  font-size: 0.85rem;
+  margin-top: 0.8rem;
+  color: #666;
+}
+.texto-secundario a {
+  font-weight: var(--font-weight-semibold);
+  color: var(--btn-other);
+  text-decoration: none;
+}
+
+.texto-secundario a:hover {
+  text-decoration: underline;
+}
+
+/* Columna derecha (imagen) */
+.registro-right {
+  width: 600px;
+  height: 100%;
+}
+.registro-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* modal: oculto por defecto */
+.modal {
+  display: none;               /* oculto */
+  position: fixed;
+  z-index: 10000;
+  inset: 0;                    /* top:0; right:0; bottom:0; left:0; */
+  background-color: rgba(0,0,0,0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+/* cuando tenga .is-open se muestra */
+.modal.is-open {
+  display: flex;
+}
+
+/* evita scroll del body cuando modal abierto */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* card centrada */
+.modal-content {
+  background: var(--bg);
+  width: 420px;
+  max-width: calc(100% - 32px);
+  padding: 28px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+  color: var(--btn-hover);; /* verde */
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.modal-content .btn-registrar {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: var(--btn-hover);
+  color: var(--bg);
+  font-size: var(--font-size-lg);
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content .btn-registrar:hover {
+  background: var(--btn);
+}

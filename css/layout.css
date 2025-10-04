@@ -1,0 +1,222 @@
+/* ==============================
+   Google Fonts
+============================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* ==============================
+   VARIABLES DE COLOR
+============================== */
+:root {
+  /* Principales */
+  --btn: #A4FF07;
+  --btn-hover: #94d800;
+  --btn-other: #4E06E6;
+  --btn-other-hover: #704ffd;
+
+  --bg: #f4f6fa;
+  /*#ECEEF0;*/
+  --bg-alt: #ffffff;
+  --text-primary: #1C2129;
+  --text-secondary: #5F5F5F;
+  --accent: #5BBB7D;
+  --accent-hover: #4FA56E;
+  --border: #D3D6DA;
+  --shadow: rgba(0, 0, 0, 0.08);
+
+  /* Estados */
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+  --info: #17a2b8;
+
+  /* Dark mode */
+  --bg-dark: #1C2129;
+  --bg-alt-dark: #2A2F36;
+  --text-primary-dark: #ECEEF0;
+  --text-secondary-dark: #C1C1C1;
+  --accent-dark: #7CDFA6;
+  --btn-dark: #9EE606;
+  --btn-hover-dark: #89C904;
+
+  /* Tipografía */
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-md: 1rem;
+  /* 16px */
+  --font-size-lg: 1.25rem;
+  /* 20px */
+  --font-size-xl: 1.5rem;
+  /* 24px */
+  --font-size-2xl: 2rem;
+  /* 32px */
+  --font-size-3xl: 2.5rem;
+  /* 40px */
+  --font-size-4xl: 3rem;
+  /* 48px */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-normal: 1.5;
+  --line-height-tight: 1.2;
+  --line-height-loose: 1.6;
+}
+
+
+/* ==============================
+   Dark Mode
+============================== */
+.dark {
+  --bg: var(--bg-dark);
+  --bg-alt: var(--bg-alt-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --btn: var(--btn-dark);
+  --btn-hover: var(--btn-hover-dark);
+  --accent: var(--accent-dark);
+}
+
+/* ==============================
+   RESET
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==============================
+   BASE
+============================== */
+body,
+html {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--font-size-base);
+  background-color: var(--bg);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-secondary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==============================
+   BOTONES
+============================== */
+.btn {
+  display: inline-block;
+  background: var(--btn);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+}
+
+.btn-login-container {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  text-align: center;
+}
+
+.btn-login {
+  background: var(--btn-other);
+  color: #fff;
+}
+
+.btn-login:hover {
+  background: var(--btn-other-hover);
+}
+
+/* Dark mode botones */
+.dark .btn {
+  background: var(--btn);
+  color: var(--bg);
+}
+
+.dark .btn:hover {
+  background: var(--btn-hover);
+}
+
+/* ==============================
+   HEADER / NAVBAR
+============================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 78px;
+  padding: 1rem 2rem;
+  background: var(--bg);
+  z-index: 1000;
+  box-shadow: 0 2px 4px var(--shadow);
+  border-bottom: var(--bg-alt-dark) 0.3rem solid;
+}
+
+/* ==============================
+  FOOTER
+============================== */
+footer {
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-dark);
+  padding: 1rem;
+  height: 230px;
+}

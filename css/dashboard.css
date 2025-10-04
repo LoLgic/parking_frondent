@@ -1,0 +1,275 @@
+
+
+.search-container {
+  flex: 1;
+  max-width: 400px;
+  margin: 0 20px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 0.95rem;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.icon-btn i {
+  color: var(--bg-alt-dark);;
+  font-size: var(--font-size-xl);
+  transition: color 0.3s ease;
+}
+
+.icon-btn i .bell {
+  width: 40px;
+}
+
+.icon-btn  i:hover {
+  color: var(--btn-other-hover);
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+/* Dropdown oculto por defecto */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  min-width: 180px;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.dropdown-menu.active {
+  display: flex;
+}
+
+.dropdown-menu a {
+  padding: 12px 15px;
+  display: block;
+  text-decoration: none;
+  color: #1c2129;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background: #eceef0;
+}
+
+/* Mostrar al hacer hover */
+.user-menu:hover .dropdown-menu {
+  display: flex;
+}
+
+.user-menu i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-alt-dark);;
+  font-size: var(--font-size-xl);
+  color: var(--bg);
+  object-fit: cover;
+}
+
+/* --- Responsive --- */
+.search-btn {
+  display: none; /* oculta la lupa por defecto */
+}
+
+/* Overlay oculto por defecto */
+.search-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(28, 33, 41, 0.95);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center; 
+}
+
+.search-overlay.active {
+  display: flex;
+  align-items: flex-start;
+}
+
+.search-box {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+   margin-top: 4rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 50px 12px 15px;
+ 
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+/* =========================================
+   LAYOUT: DASHBOARD
+========================================= */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  margin-top: 70px; /* espacio del header */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: var(--bg-alt-dark);
+  color: var(--bg);
+  padding-top: 30px;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar i {
+  font-size: var(--font-size-xl);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar .sigout {
+  margin-top: 35vh;
+} 
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-white);
+  text-decoration: none;
+  padding: 12px 40px;
+  font-size: var(--font-size-base);
+}
+
+
+
+.sidebar a:hover {
+  font-size: var(--font-size-md);
+  background: rgba(255,255,255,0.1);
+  background: var(--btn-other-hover);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Main */
+.main-content {
+  margin-left: 230px;
+  padding: 30px;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+
+
+/* En pantallas pequeñas */
+@media (max-width: 768px) {
+  .search-container {
+    display: none; /* oculta input */
+  }
+
+  .search-btn {
+    display: inline-block; /* muestra la lupa */
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+  .search-container {
+    display: none;
+  }
+
+  .search-btn {
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+
+  .sidebar {
+    width: 70px;
+    align-items: center;
+  }
+
+  .sidebar a {
+    font-size: 0;
+    padding: 12px 15px;
+  }
+
+  .sidebar a:hover {
+    font-size: 0;
+  }
+
+  .sidebar a::before {
+    font-size: 1.2rem;
+  }
+
+  .main-content {
+    margin-left: 70px;
+  }
+}
