@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
 
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-
-
 
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -25,7 +22,7 @@
     <header class="site-header">
         <div class="header-container">
             <!-- Logo -->
-            <a href="index.html" class="logo" aria-label="Ir al Inicio">
+            <a href="#" class="logo" aria-label="Ir al Inicio">
                 Park<span>ea</span>
             </a>
 
@@ -43,9 +40,9 @@
             <div class="user-actions">
                 <!-- Icono de notificaciones -->
                 <button class="icon-btn" aria-label="Notificaciones">
-                <!--    <i class="fa-solid fa-bell"></i> -->
+                    <!--    <i class="fa-solid fa-bell"></i> -->
                     <i class="fa-regular fa-bell"></i>
-                    
+
                 </button>
 
                 <!-- Menú de usuario -->
@@ -65,10 +62,12 @@
         <!-- Sidebar de navegación -->
         <aside class="sidebar">
             <nav>
-                <a href="#"><i class="fa-solid fa-list-ul"></i>Reservas</a>
-                <a href="#"><i class="fas fa-car-side"></i>Vehículos</a>
-                <a href="#"><i class="fa-solid fa-ticket"></i>Tickets</a>
-                <a href="#"><i class="fa-solid fa-coins"></i>Pagos</a>
+                <!--
+                <a href="#" class="nav-link active" data-section="reservas"><i class="fa-solid fa-list-ul"></i>Reservas</a>
+                -->
+                <a href="#" class="nav-link active" data-section="vehiculos"><i class="fas fa-car-side"></i>Vehículos</a>
+                <a href="#" class="nav-link" data-section="tickets"><i class="fa-solid fa-ticket"></i>Tickets</a>
+                <a href="#" class="nav-link" data-section="pagos"><i class="fa-solid fa-coins"></i>Pagos</a>
                 <a href="#"><i class="fa-solid fa-gear"></i>Ajustes</a>
                 <a href="#" class="sigout"><i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
 
@@ -76,8 +75,17 @@
         </aside>
 
         <!-- Contenido principal -->
-        <main class="main-content" id="mainContent">
-            <h1>Reserva</h1>
+        <main class="main-content reservas" id="mainContent">
+            <div class="vehiculos-container">
+                <div class="vehiculos-header">
+                    <h1>Mis Vehículos</h1>
+                    <button class="btn-agregar">Registrar nuevo vehículo</button>
+                </div>
+
+                <div id="vehiculos-list" class="vehiculos-list">
+                    <!-- Aquí se insertarán las tarjetas dinámicamente -->
+                </div>
+            </div>
         </main>
     </div>
 
@@ -88,8 +96,6 @@
             <button id="closeSearch" class="close-btn" aria-label="Cerrar búsqueda">&times;</button>
         </div>
     </div>
-
-
 
     <footer>
         <div class="footer-container" id="contacto">
