@@ -8,7 +8,7 @@
 
 .search-container input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 8px 20px;
   border: 1px solid #ccc;
   border-radius: 20px;
   font-size: 0.95rem;
@@ -427,76 +427,231 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  align-items: flex-start;
 }
 
 .vehiculos-header h1 {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
 }
 
+.vehiculos-titulo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.vehiculos-descripcion {
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  margin-top: 0.2rem;
+  width: 650px;
+}
+
+
 .btn-agregar {
-  background-color: var(--accent);
+  width: auto;
+  height: 44px;
+  background: var(--btn-other);
+  color: var(--bg);
+  font-size: var(--font-size-base);
   border: none;
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  padding: 10px 20px;
+  margin-right: 40px;
+  border-radius: 10px;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
-  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s ease;
 }
 
 .btn-agregar:hover {
-  background-color: #8fd006;
+  background-color: var(--btn-other-hover);
 }
 
-/* Listado */
+/* Listado similar al de reservas */
 .vehiculos-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
-/* Tarjeta individual */
+/* Tarjeta individual (idéntica visualmente a reserva-card) */
 .vehiculo-card {
-  background-color: #fff;
+  height: 250px;
+  width: 350px;
+  background: var(--bg-alt);
+  background: var(--bg-alt-dark);
   border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   transition: transform 0.2s ease;
 }
 
-.vehiculo-card:hover {
-  transform: translateY(-3px);
-}
 
 .vehiculo-info h3 {
   font-size: 1.2rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 10px;
+  color: var(--text-primary-dark);
 }
 
 .vehiculo-info p {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin: 0.2rem 0;
+  margin: 3px 0;
+  color: var(--text-secondary-dark);
 }
 
+/* Botón eliminar con estilo uniforme al de cancelar */
 .btn-eliminar {
-  background-color: #e74c3c;
-  color: #fff;
+  background: #ff4d4d;
+  color: white;
   border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1rem;
+  padding: 8px 15px;
+  /*margin-top: 170px;*/
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s;
 }
 
 .btn-eliminar:hover {
-  background-color: #c0392b;
+  background: #e43c3c;
+}
+
+/* Mensaje cuando no hay vehículos */
+.sin-vehiculos {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 2rem;
 }
 
 
+/* Modal base */
+.modal {
+  display: none; /* visible cuando .is-open */
+  position: fixed;
+  inset: 0;
+  z-index: 2200;
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Modal visible */
+.modal.is-open { display: flex; }
+
+/* Contenido */
+.modal-content {
+  width: 420px;
+  max-width: calc(100% - 2rem);
+  background: var(--bg-alt, #fff);
+  color: var(--text-primary, #1C2129);
+  border-radius: 12px;
+  padding: 1.6rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+/* Close */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+/* Form */
+.vehiculo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 0.6rem;
+}
+
+.vehiculo-form label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.vehiculo-form input,
+.vehiculo-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border, #D3D6DA);
+  font-size: 1rem;
+  outline: none;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+.vehiculo-form input:focus,
+.vehiculo-form select:focus {
+  box-shadow: 0 0 0 4px rgba(90, 200, 120, 0.08);
+  border-color: var(--accent, #5BBB7D);
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border, #D3D6DA);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.btn-submit {
+  background: var(--btn, #A4FF07);
+  border: none;
+  color: #111;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Disabled state */
+.btn-submit[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensajes */
+.form-message {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .modal-content { width: 100%; padding: 1rem; border-radius: 8px; }
+}
 
 
 /* En pantallas pequeñas */

@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
     <link rel="stylesheet" href="css/login.css">
+
 </head>
 <body>
     <header>
@@ -16,16 +19,16 @@
     <main>
         <div class="auth-form">
             <div class="box">
-                <div class="iniciar-sesion">
-                    <h1>Iniciar Sesión</h1>
-                </div> 
-
+                
                 <div class="inputBox">
+                    <div class="iniciar-sesion">
+                        <h2>Iniciar Sesión</h2>
+                    </div> 
                     <form id="loginForm">
-                        <h6>Nombre de usuario o dirección de correo electrónico</h6>
-                        <input type="text" id="email" placeholder="" autocomplete="off" required>
+                        <p>Correo electrónico</p>
+                        <input type="email" id="email" placeholder="" autocomplete="on" required>
 
-                        <h6>Contraseña</h6>
+                        <p>Contraseña</p>
                         <input type="password" id="clave" placeholder="" required>
 
                         <button type="submit">Iniciar sesión</button>
