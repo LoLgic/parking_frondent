@@ -66,7 +66,8 @@
                 <!--
                 <a href="#" class="nav-link active" data-section="reservas"><i class="fa-solid fa-list-ul"></i>Reservas</a>
                 -->
-                <a href="#" class="nav-link active" data-section="vehiculos"><i class="fas fa-car-side"></i>Vehículos</a>
+                <a href="#" class="nav-link active" data-section="vehiculos"><i
+                        class="fas fa-car-side"></i>Vehículos</a>
                 <a href="#" class="nav-link" data-section="reservas"><i class="fa-solid fa-ticket"></i>Reservas</a>
                 <a href="#" class="nav-link" data-section="pagos"><i class="fa-solid fa-coins"></i>Pagos</a>
                 <a href="#"><i class="fa-solid fa-gear"></i>Ajustes</a>
@@ -89,6 +90,7 @@
                         </div>
                         <button class="btn-agregar"><i class="fa-solid fa-plus"></i>Nuevo vehículo</button>
                     </div>
+                    
                     <div id="vehiculos-list" class="vehiculos-list">
                         <!-- Aquí se insertarán las tarjetas dinámicamente -->
                     </div>
@@ -96,13 +98,13 @@
             </section>
 
             <!-- Sección Tickets -->
-            <section class="section tickets-section" id="sectionTickets" hidden>
+            <section class="section tickets-section" id="sectionTickets" hidden style="display: none;">
                 <h1>Reservas</h1>
                 <p>Aquí podrás consultar tus Reservas emitidos.</p>
             </section>
 
             <!-- Sección Pagos -->
-            <section class="section pagos-section" id="sectionPagos" hidden>
+            <section class="section pagos-section" id="sectionPagos" hidden style="display: none;">
                 <h1>Pagos</h1>
                 <p>Consulta tus métodos de pago y transacciones.</p>
             </section>
@@ -110,34 +112,35 @@
 
 
         <!-- Modal: Registrar Nuevo Vehículo -->
-            <div id="vehiculoModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="vehiculoModalTitle">
-                <div class="modal-content" role="document">
-                    <button class="modal-close" aria-label="Cerrar">&times;</button>
-                    <h2 id="vehiculoModalTitle">Registrar nuevo vehículo</h2>
+        <div id="vehiculoModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="vehiculoModalTitle">
+            <div class="modal-content" role="document">
+                <button class="modal-close" aria-label="Cerrar">&times;</button>
+                <h2 id="vehiculoModalTitle">Registrar nuevo vehículo</h2>
 
-                    <form id="vehiculoForm" class="vehiculo-form" autocomplete="on">
-                        <label for="tipo">Tipo</label>
-                        <select id="tipo" name="tipo" required autocomplete="off">
-                            <option value="">Selecciona tipo</option>
-                            <option value="CARRO">Carro</option>
-                            <option value="MOTO">Moto</option>
-                            <option value="BICICLETA">Bicicleta</option>
-                        </select>
+                <form id="vehiculoForm" class="vehiculo-form" autocomplete="on">
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo" name="tipo" required autocomplete="off">
+                        <option value="">Selecciona tipo</option>
+                        <option value="CARRO">Carro</option>
+                        <option value="MOTO">Moto</option>
+                        <option value="BICICLETA">Bicicleta</option>
+                    </select>
 
-                        <label for="placa">Placa</label>
-                        <input id="placa" name="placa" type="text" placeholder="Ej: 1252CF" required minlength="6" maxlength="6" pattern="[A-Za-z0-9]{6}" title="La placa debe tener exactamente 6 caracteres alfanuméricos (sin espacios)" autocomplete="off"
-                            inputmode="latin" />
+                    <label for="placa">Placa</label>
+                    <input id="placa" name="placa" type="text" placeholder="Ej: 1252CF" required minlength="6"
+                        maxlength="6" pattern="[A-Za-z0-9]{6}"
+                        title="La placa debe tener exactamente 6 caracteres alfanuméricos (sin espacios)"
+                        autocomplete="off" inputmode="latin" />
 
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-cancel" id="vehiculoCancel">Cancelar</button>
-                            <button type="submit" class="btn btn-submit" id="vehiculoSubmit">Registrar</button>
-                        </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="vehiculoCancel">Cancelar</button>
+                        <button type="submit" class="btn btn-submit" id="vehiculoSubmit">Registrar</button>
+                    </div>
 
-                        <p id="vehiculoMessage" class="form-message" aria-live="polite"></p>
-                    </form>
-                </div>
+                    <p id="vehiculoMessage" class="form-message" aria-live="polite"></p>
+                </form>
             </div>
-
+        </div>
     </div>
 
     <!-- OVERLAY DE BÚSQUEDA (para móviles, fuera del layout principal) -->

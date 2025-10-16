@@ -35,17 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContent = document.getElementById("mainContent");
 
   if (token && mainContent) {
-    // Cargar vista de vehículos al iniciar sesión
-    mainContent.className = "main-content vehiculos";
+    document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+    document.getElementById("sectionVehiculos").style.display = "block";
     cargarVehiculos();
 
-    // Marcar la opción "Vehículos" como activa en el sidebar
     const navLinks = document.querySelectorAll(".nav-link");
     navLinks.forEach((link) => {
       if (link.dataset.section === "vehiculos") link.classList.add("active");
       else link.classList.remove("active");
     });
   }
+
 
 
 
@@ -84,11 +84,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const section = link.dataset.section;
         mainContent.className = "main-content " + section;
 
+        // Ocultar todas las secciones
+        document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+
+        // Mostrar solo la sección seleccionada
+        const sectionToShow = document.getElementById(`section${section.charAt(0).toUpperCase() + section.slice(1)}`);
+        if (sectionToShow) {
+          sectionToShow.style.display = "block";
+        }
+
+        // Si es la sección de vehículos, recargar lista dinámica
         if (section === "vehiculos") {
           await cargarVehiculos();
-        } else {
-          mainContent.innerHTML = `<h1>${section}</h1>`;
         }
+
       });
     });
   }
@@ -97,24 +106,15 @@ document.addEventListener("DOMContentLoaded", () => {
   //  FUNCIÓN: CARGAR VEHÍCULOS
   // -------------------------------
   async function cargarVehiculos() {
-    mainContent.innerHTML = `
-      <div class="vehiculos-container">
-        <div class="vehiculos-header">
-          <div class="vehiculos-titulo">
-            <h1>Mis vehículos</h1>
-            <p class="vehiculos-descripcion">
-              Gestiona aquí tus vehículos de forma rápida y sencilla. Agrega los que usas con frecuencia, actualiza sus datos o elimina los que ya no utilices.
-            </p>
-          </div>
-          <button class="btn-agregar"><i class="fa-solid fa-plus"></i> Nuevo vehículo</button>
-        </div>
-        <div id="vehiculos-list" class="vehiculos-list"></div>
-      </div>
-    `;
-
     const listContainer = document.getElementById("vehiculos-list");
-    const token = localStorage.getItem("token");
+    if (!listContainer) {
+      console.warn("No se encontró el contenedor #vehiculos-list");
+      return;
+    }
 
+    listContainer.innerHTML = `<p class="cargando">Cargando vehículos...</p>`;
+
+    const token = localStorage.getItem("token");
     if (!token) {
       listContainer.innerHTML = `<p style="color:red;">No se encontró el token. Por favor, inicia sesión nuevamente.</p>`;
       return;
@@ -128,6 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) throw new Error("Error al obtener los vehículos");
       const data = await res.json();
 
+      // Limpia el contenedor antes de agregar nuevas tarjetas
+      listContainer.innerHTML = "";
+
       if (!data || data.length === 0) {
         listContainer.innerHTML = `<p class="sin-vehiculos">No tienes vehículos registrados.</p>`;
         return;
@@ -137,13 +140,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = document.createElement("div");
         card.classList.add("vehiculo-card");
         card.innerHTML = `
-          <div class="vehiculo-info">
-            <h3><strong>Tipo:</strong> ${v.tipo}</h3>
-            <p><strong>Placa:</strong> ${v.placa}</p>
-            <p><strong>Propietario:</strong> ${v.propietario}</p>
-          </div>
-          <button class="btn-eliminar" data-id="${v.idVehiculo}">Eliminar</button>
-        `;
+        <div class="vehiculo-info">
+          <h3><strong>Tipo:</strong> ${v.tipo}</h3>
+          <p><strong>Placa:</strong> ${v.placa}</p>
+          <p><strong>Propietario:</strong> ${v.propietario || "—"}</p>
+        </div>
+        <button class="btn-eliminar" data-id="${v.idVehiculo}">Eliminar</button>
+      `;
         listContainer.appendChild(card);
       });
 
@@ -152,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
       listContainer.innerHTML = `<p style="color:red;">Error al cargar los vehículos.</p>`;
     }
   }
+
 
   // Validación adicional en JavaScript
   document.getElementById("vehiculoForm").addEventListener("submit", (e) => {
