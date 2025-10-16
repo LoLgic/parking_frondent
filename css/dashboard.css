@@ -486,7 +486,6 @@
   height: 250px;
   width: 350px;
   background: var(--bg-alt);
-  background: var(--bg-alt-dark);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
@@ -501,12 +500,12 @@
 .vehiculo-info h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: var(--text-primary-dark);
+  color: var(--text-primary);
 }
 
 .vehiculo-info p {
   margin: 3px 0;
-  color: var(--text-secondary-dark);
+  color: var(--text-secondary);
 }
 
 /* Botón eliminar con estilo uniforme al de cancelar */

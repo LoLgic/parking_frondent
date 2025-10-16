@@ -1,63 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Document</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/login.css">
 
+    <!-- Font Awesome (agregar en <head>) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+
     <header>
-        <div class="container-logo">
-            <a href="/" class="logo">Park<span>ea</span></a>
-        </div>    
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">Park<span>ea</span></a>
+            <!--<img src="assets/img/logo.png" alt="Logo Parking">-->
+
+            <div class="btn-login-container">
+                <a href="registro.html" class="btn btn-login" style="color: #fff;">Registrarse</a>
+            </div>
+        </div>
     </header>
-   
+
     <main>
-        <div class="auth-form">
-            <div class="box">
-                
-                <div class="inputBox">
-                    <div class="iniciar-sesion">
-                        <h2>Iniciar Sesión</h2>
-                    </div> 
-                    <form id="loginForm">
-                        <p>Correo electrónico</p>
-                        <input type="email" id="email" placeholder="" autocomplete="on" required>
+        <section class="container-login">
+            <div class="auth-form">
+                <div class="box">
 
-                        <p>Contraseña</p>
-                        <input type="password" id="clave" placeholder="" required>
+                    <div class="inputBox">
+                        <div class="iniciar-sesion">
+                            <h2>Iniciar Sesión</h2>
+                            <p>¡Bienvenido de nuevo! Por favor, introduce tus datos.</p>
+                        </div>
+                        <form id="loginForm" class="loginForm">
+                            <p>Email</p>
+                            <input type="email" id="email" placeholder="" autocomplete="on" required>
 
-                        <button type="submit">Iniciar sesión</button>
-                    </form>
-                </div>
+                            <p>Contraseña</p>
+                            <div class="password-container">
+                                <input type="password" id="clave" placeholder="" required>
+                                <span class="toggle-password" id="togglePassword"><i
+                                        class="fa-regular fa-eye"></i></span>
+                            </div>
 
-                <!-- Mensajes -->
-                <div id="mensajeExito" style="color: green; margin-top: 10px;"></div>
-                <div id="mensajeError" style="color: red; margin-top: 10px;"></div>
+                            <button type="submit">Iniciar sesión</button>
+                        </form>
 
-                <div class="container-register">
-                    <a href="register.html">Crear una cuenta</a>
+                        <div class="container-register">
+                            <p>¿No tienes cuenta?<a href="registro.html"> Regístrate</a></p>
+                        </div>
+                    </div>
+
+
+                    <!-- Mensajes -->
+                    <div id="mensajeExito" style="color: green; margin-top: 10px;"></div>
+                    <div id="mensajeError" style="color: red; margin-top: 10px;"></div>
+
                 </div>
             </div>
-        </div>   
+        </section>
     </main>
 
-    <footer>
-        <div class="container-footer">
-            <ul>
-                <li><a href="">Facebook</a></li>
-                <li><a href="">Instagram</a></li>
-                <li><a href="">YouTube</a></li>
-                <li><a href="">GitHub</a></li>
-            </ul>
-        </div>
-    </footer>
-
-    <!-- Script para conexión con la API -->
     <script src="js/login.js"></script>
+    <script src="js/toggle-password.js"></script>
+
 </body>
+
 </html>

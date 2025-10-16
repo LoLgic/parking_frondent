@@ -1,0 +1,93 @@
+/* ==============================
+   FOOTER
+============================== */
+.footer-container {
+  max-width: 1400px; 
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+/* Logo */
+.footer-logo {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-logo span {
+  color: var(--accent);
+}
+
+/* Links */
+.footer-links {
+  height: 24px;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  font-size: var(--font-size-md);
+  color: #fff;
+  text-decoration: none;
+      transition: 0.3s ease-in-out;
+  transition: color 0.2s ease;
+
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* Redes sociales */
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.footer-social a {
+  font-size: var(--font-size-xl);
+  color: #fff;
+}
+
+.footer-social a:hover {
+  color: var(--accent);
+}
+
+/* Parte inferior */
+.footer-bottom {
+  width: 100%;
+  
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+}
+
+.footer-bottom p {
+  font-size: var(--font-size-sm);
+  color: #ccc;
+}
+
+/* ---------- FOOTER ---------- */
+@media (max-width: 360px) {
+  .footer-links {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-links a {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+  }
+}

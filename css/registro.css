@@ -1,3 +1,13 @@
+.btn-login {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: .2rem;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+
 /* Main centrado */
 main {
   /*min-height: calc(100vh - 78px - 60px); /* ocupa toda la pantalla menos header y footer */
@@ -23,7 +33,8 @@ main {
 .registro-left {
   width: 400px;
   height: 100%;
-  background: #f5f5f5; /* gris claro */
+  background: #f5f5f5;
+  /* gris claro */
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -31,7 +42,7 @@ main {
 }
 
 .registro-left h2 {
-  color: var( --text-primary);
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   width: 300px;
 }
@@ -39,7 +50,7 @@ main {
 .registro-left p {
   width: 300px;
   font-size: var(--font-size-sm);
-  
+
 }
 
 /* Formulario */
@@ -59,6 +70,7 @@ main {
   gap: 10px;
 
 }
+
 .form-row input {
   width: 145px;
 }
@@ -76,6 +88,7 @@ main {
   cursor: pointer;
   transition: background 0.2s ease;
 }
+
 .btn-registrar:hover {
   background: var(--btn-other-hover);
 }
@@ -86,6 +99,7 @@ main {
   margin-top: 0.8rem;
   color: #666;
 }
+
 .texto-secundario a {
   font-weight: var(--font-weight-semibold);
   color: var(--btn-other);
@@ -101,6 +115,7 @@ main {
   width: 600px;
   height: 100%;
 }
+
 .registro-right img {
   width: 100%;
   height: 100%;
@@ -110,11 +125,13 @@ main {
 
 /* modal: oculto por defecto */
 .modal {
-  display: none;               /* oculto */
+  display: none;
+  /* oculto */
   position: fixed;
   z-index: 10000;
-  inset: 0;                    /* top:0; right:0; bottom:0; left:0; */
-  background-color: rgba(0,0,0,0.6);
+  inset: 0;
+  /* top:0; right:0; bottom:0; left:0; */
+  background-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;
 }
@@ -137,11 +154,13 @@ body.modal-open {
   padding: 28px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content h2 {
-  color: var(--btn-hover);; /* verde */
+  color: var(--btn-hover);
+  ;
+  /* verde */
   margin-bottom: 8px;
 }
 

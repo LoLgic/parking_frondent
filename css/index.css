@@ -1,0 +1,758 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    height: 40px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Logo */
+.logo {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    width: 100px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    display: block;
+}
+
+/* Navegación */
+.nav-menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    gap: 2rem;
+    margin: 0 auto;
+}
+
+.nav-list {
+    display: flex;
+    height: 100%;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-list a {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    padding: 5px;
+    position: relative;
+    transition: all ease .50s;
+}
+
+.nav-list a::after {
+    position: absolute;
+    content: '';
+    height: 3px;
+    bottom: 0;
+    width: 0%;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 2px;
+    background: var(--accent);
+    transition: all ease .50s;
+}
+
+.nav-list a:hover::after {
+    width: 40%;
+}
+
+.nav-list a:hover {
+    color: var(--accent);
+}
+
+.nav-list a.active {
+    color: var(--accent);
+}
+
+.nav-list a.active::after {
+    width: 40%;
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+/* ==============================
+   BOTON LOGIN
+============================== */
+.btn-login {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: .2rem;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-login-container {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    text-align: center;
+}
+
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--bg-alt);
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(28, 33, 41, 0.65);
+}
+
+.hero picture,
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 30px var(--bg-dark);
+    font-weight: var(--font-weight-semibold);
+    padding: 0 4rem;
+    line-height: 3rem;
+}
+
+.hero p {
+    font-size: var(--font-size-xl);
+    margin-bottom: 20px;
+    color: var(--bg);
+    text-shadow: 1px 1px 10px var(--bg-dark);
+    font-weight: lighter;
+}
+
+.btn-hero {
+    display: inline-block;
+    background: var(--btn-hover);
+    color: var(--text-primary);
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 30px;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    font-size: var(--font-size-lg);
+}
+
+.btn-hero:hover {
+    background: var(--btn);
+    transform: scale(1.05);
+    color: var(--text-primary);
+}
+
+/* ============================= */
+/* INFO SECTION */
+/* ============================= */
+.info {
+    width: 100%;
+    padding: 3.4rem 4rem 3rem 4rem;
+    background: var(--bg);
+    text-align: center;
+    display: block;
+}
+
+.info .container {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 1.5rem;
+    background: var(--bg-alt);
+    padding-top: 20px;
+}
+
+.info-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.info-description {
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+    font-size: var(--font-size-md);
+    color: var(--text-secondary);
+    line-height: var(--line-height-loose);
+}
+
+.info h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--accent);
+}
+
+/* Grid de cards */
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-alt);
+    padding: 1.5rem 2.5rem;
+    border-radius: 0.75rem;
+}
+
+/* Card individual */
+.card {
+    background: var(--bg-alt);
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+}
+
+.card h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.card p {
+    width: 220px;
+    height: 40px;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-normal);
+}
+
+.card i {
+    color: var(--btn-other-hover);
+    font-size: var(--font-size-xl);
+    margin-bottom: 0.5rem;
+}
+
+/* ============================= */
+/* PRECIOS SECTION               */
+/* ============================= */
+.precios {
+    padding: 5rem 1.5rem 1rem;
+    background: var(--bg-alt);
+    text-align: center;
+}
+
+.precios-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.precios-inner {
+    margin: 0 auto;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.precios-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    text-align: left;
+    margin: 2rem 0 0.75rem 0;
+    max-width: 100%;
+    padding: 0 26rem 0 3rem;
+}
+
+.precios-descripcion {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    max-width: 100%;
+    margin: 0 0 2.5rem 0rem;
+    line-height: var(--line-height-loose);
+    text-align: left;
+    margin: 0 0 1.75rem 0;
+    padding: 0 17rem 0 3rem;
+}
+
+/* Cards de precios */
+.precios-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.precios-card {
+    background: #f4f6fa;
+    border: 2px solid #6f4ffd21;
+    border-radius: 12px;
+    padding: 1rem;
+    height: 160px;
+    width: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.precios-card:hover {
+    transform: translateY(-5px);
+}
+
+.precios-card i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    width: 100px;
+    height: 50px;
+    margin: 0 auto 1rem auto;
+    font-size: var(--font-size-xl);
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-align: center;
+    background: var(--btn-other-hover);
+    border-radius: 25px;
+}
+
+.precios-card h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 5px;
+}
+
+.precios-card p {
+    margin-bottom: 5px;
+}
+
+.precio {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    color: var(--bg-alt-dark);
+}
+
+/* Beneficios */
+.precios-beneficios {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.precios-beneficios h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 2rem;
+}
+
+.precios-beneficios span {
+    color: var(--accent);
+}
+
+
+.cards-beneficios {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.beneficio {
+    max-width: 220px;
+    text-align: center;
+    padding: 5px;
+}
+
+.beneficio img {
+    width: 90px;
+    margin-bottom: 1rem;
+}
+
+.beneficio h4 {
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    width: 220px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+}
+
+.beneficio p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Botón */
+.btn-join {
+    display: inline-block;
+    background: #ffd51d;
+    color: #000;
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.btn-join:hover {
+    background: #ffe11f;
+    transform: scale(1.05);
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+
+    /* ============================= */
+    /* Responsive HEADER             */
+    /* ============================= */
+    header {
+        height: 70px;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .logo {
+        font-size: var(--font-size-lg);
+        /* 20px */
+    }
+
+    .nav-list a {
+        font-size: var(--font-size-sm);
+        /* 14px */
+    }
+
+    .btn-login {
+        font-size: var(--font-size-sm);
+        /* 14px */
+        padding: 6px 14px;
+        margin: 0 27px;
+    }
+
+    /* ============================= */
+    /* Responsive HERO */
+    /* ============================= */
+    .hero {
+        height: 360px;
+    }
+
+    .hero h1 {
+        font-size: var(--font-size-2xl);
+        /* 2.5rem ≈ 40px */
+    }
+
+    .hero p {
+        font-size: var(--font-size-md);
+        /* 1rem ≈ 16px */
+    }
+
+    .btn-hero {
+        padding: 10px 22px;
+        font-size: var(--font-size-md);
+        /* 0.875rem ≈ 14px */
+    }
+
+    /* ============================= */
+    /* Responsive INFO */
+    /* ============================= */
+    .info {
+        padding: 2.5rem 2rem;
+    }
+
+    .info-title {
+        font-size: var(--font-size-2xl);
+        /* bajar un nivel */
+    }
+
+    .info-description {
+        font-size: var(--font-size-sm);
+        padding: 0 1rem;
+        line-height: var(--line-height-normal);
+    }
+
+    .info h3 {
+        font-size: var(--font-size-xl);
+    }
+
+    .info-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .card i {
+        font-size: var(--font-size-lg);
+        margin-bottom: 0.8rem;
+    }
+
+    .card h3 {
+        font-size: var(--font-size-md);
+    }
+
+    .card p {
+        font-size: var(--font-size-sm);
+    }
+
+    /* ============================= */
+    /* Responsive Precios */
+    /* ============================= */
+    .precios-container {
+        padding: 0 1rem;
+    }
+
+    .precios-inner {
+        max-width: 720px;
+    }
+
+    .precios-title {
+        font-size: var(--font-size-xl);
+        padding: 0 30rem 0 2rem;
+    }
+
+    .precios-descripcion {
+        font-size: var(--font-size-sm);
+        padding: 0 6rem 0 2rem;
+    }
+
+    .precios-card {
+        width: 200px;
+        height: 140px;
+    }
+
+    .precios-card i {
+        width: 80px;
+        height: 40px;
+        font-size: var(--font-size-lg);
+    }
+}
+
+
+/* Móviles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        font-size: var(--font-size-xl);
+        /* 24px */
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -250px;
+        width: 180px;
+        height: 100vh;
+        background: var(--bg-alt);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.5rem 2rem;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
+
+    .nav-list a {
+        font-size: var(--font-size-md);
+        width: 100%;
+    }
+
+    .btn-login {
+        font-size: var(--font-size-sm);
+        /* 14px */
+        padding: 6px 12px;
+        margin: 0 14px;
+    }
+
+    /* ============================= */
+    /* Responsive HERO */
+    /* ============================= */
+    .hero {
+        height: 300px;
+        padding: 12px;
+    }
+
+    .hero-content {
+        padding: 10px;
+    }
+
+    .hero h1 {
+        font-size: var(--font-size-xl);
+        /* 2rem ≈ 32px */
+    }
+
+    .hero p {
+        font-size: var(--font-size-sm);
+        /* 0.875rem ≈ 14px */
+    }
+
+    .btn-hero {
+        padding: 8px 18px;
+        font-size: var(--font-size-sm);
+        /* consistente en mobile */
+    }
+
+    /* ============================= */
+    /* Responsive INFO */
+    /* ============================= */
+    .info {
+        padding: 2rem 1rem;
+    }
+
+    .info-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .info-description {
+        font-size: var(--font-size-sm);
+        margin-bottom: 2rem;
+        padding: 0 1.3rem;
+        text-align: left;
+    }
+
+    .info h3 {
+        font-size: var(--font-size-lg);
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+        /* 1 columna en móvil */
+        gap: 1.2rem;
+        padding: 0 1rem 1.5rem;
+        display: inline-block;
+    }
+
+    .card {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .card i {
+        font-size: var(--font-size-xl);
+        /* íconos más grandes para mobile */
+        margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+        font-size: var(--font-size-md);
+    }
+
+    .card p {
+        font-size: var(--font-size-sm);
+        /*padding: 0 4rem;*/
+        line-height: 1rem;
+    }
+
+    .beneficio {
+        max-width: 180px;
+    }
+
+    .cards-beneficios {
+        gap: 1rem;
+    }
+
+    .beneficio img {
+        width: 70px;
+        margin: 0 50px;
+        margin-bottom: 5px;
+    }
+
+    .beneficio h4 {
+        font-size: var(--font-size-sm);
+        height: 45px;
+        width: 170px;
+    }
+
+    /* ============================= */
+    /* Responsive Precios */
+    /* ============================= */
+    .precios {
+        padding: 3rem 1rem 1rem;
+    }
+
+    .precios-inner {
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+
+    .precios-title,
+    .precios-descripcion {
+        text-align: center;
+        /* opcional: en móvil se ven mejor centrados */
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+
+    .precios-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .precios-card {
+        width: 90%;
+        max-width: 320px;
+        height: auto;
+        padding: 1.25rem;
+    }
+
+    .precios-card i {
+        width: 70px;
+        height: 36px; 
+        font-size: var(--font-size-lg);
+    }
+}

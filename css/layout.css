@@ -66,20 +66,6 @@
   --line-height-loose: 1.6;
 }
 
-
-/* ==============================
-   Dark Mode
-============================== */
-.dark {
-  --bg: var(--bg-dark);
-  --bg-alt: var(--bg-alt-dark);
-  --text-primary: var(--text-primary-dark);
-  --text-secondary: var(--text-secondary-dark);
-  --btn: var(--btn-dark);
-  --btn-hover: var(--btn-hover-dark);
-  --accent: var(--accent-dark);
-}
-
 /* ==============================
    RESET
 ============================== */
@@ -152,48 +138,17 @@ ul {
    BOTONES
 ============================== */
 .btn {
-  display: inline-block;
-  background: var(--btn);
-  color: #fff;
-  padding: 0.5rem 1rem;
+  background: var(--btn-other);
+  color: var(--bg);
   border: none;
-  border-radius: 0.5rem;
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
   text-align: center;
 }
 
 .btn:hover {
-  background: var(--btn-hover);
-}
-
-.btn-login-container {
-  display: flex;
-  justify-content: center;
-  width: 100px;
-  text-align: center;
-}
-
-.btn-login {
-  background: var(--btn-other);
-  color: #fff;
-}
-
-.btn-login:hover {
   background: var(--btn-other-hover);
 }
 
-/* Dark mode botones */
-.dark .btn {
-  background: var(--btn);
-  color: var(--bg);
-}
-
-.dark .btn:hover {
-  background: var(--btn-hover);
-}
 
 /* ==============================
    HEADER / NAVBAR
@@ -203,12 +158,20 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 78px;
+  height: auto;
   padding: 1rem 2rem;
   background: var(--bg);
   z-index: 1000;
   box-shadow: 0 2px 4px var(--shadow);
   border-bottom: var(--bg-alt-dark) 0.3rem solid;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 /* ==============================

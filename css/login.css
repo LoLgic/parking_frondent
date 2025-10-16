@@ -1,109 +1,64 @@
-/* ==============================
-   Google Fonts
-============================== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    text-decoration: none;
-}
-
-body {
-    background: #f4f6fa;
-}
-
-header {
-    width: 100%;
-    height: 78px;
-    padding: 1rem 2rem;
-    border-bottom: #1C2129 0.2rem solid;
-}
-
-.container-logo {
-    position: relative;
-    width: 100%;
-    height: 43px;
+.container-login {
+    height: 100vh;
     display: flex;
-    justify-content: left;
     align-items: center;
-    padding: 0 60px;
-}
-.container-logo .logo {
-    text-align: center;
-    width: 100px;
+    justify-content: center;
 }
 
-
-.logo span {
-  color: #5BBB7D;
-}
-
-.logo {
-  font-size:  1.5rem;;
-  font-weight: 700;
-  color: #1C2129;
-}
-
-
-main {
-    width: 100%;
-    height: 366px;
-    display: block;
-}
-
-main .auth-form {
+.auth-form {
     width: 340px;
     height: 366px;
     padding: 0px 16px;
-    margin:  0px auto;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .iniciar-sesion {
     width: 100%;
-    height: 37px;
+    height: auto;
     margin-bottom: 16px;
 }
 
-.iniciar-sesion h1{
-    font-weight: 500;
+.iniciar-sesion h2 {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-2xl);
+    text-align: left;
+    margin-bottom: 4px;
+    padding-left: 5px;
 }
 
-h2 {
-    color: #1C2129;
-    font-weight: 600;
-    font-size: 2rem;
-    text-align: left;
+.iniciar-sesion P {
+    height: 50px;
+    font-size: var(--font-size-sm);
+    padding-left: 5px;
 }
+
+
 
 .inputBox {
-    width: 330px;
-    height: auto;
-    background:#f5f5f5;
+    background: #f5f5f5;
     border-radius: 16px;
-    margin: 50px 0px 0px;
     padding: 16px;
     font-size: 14px;
     box-shadow: 5px 20px 50px #C1C1C1;
 }
 
-
-
-.inputBox p{
-    color: #5F5F5F;
+.loginForm p {
+    color: var(--text-primary);
     font-size: .95rem;
     font-weight: 400;
-    margin: 0px 0px 8px;
+    margin-bottom: 5px;
+    padding-left: 5px;
 }
-
 
 .inputBox input {
     background-color: #fff;
     padding: 5px 12px;
-    margin: 4px 0px 16px;
-    border: 1px solid #ccc;
+    margin-bottom: 16px;
+    border: 2px solid var(--border);
     outline: none;
     width: 300px;
     height: 40px;
@@ -113,7 +68,30 @@ h2 {
 }
 
 .inputBox input:focus {
-    border: 2px solid #1C2129;
+    border: 2px solid var(--btn-other-hover);
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.1rem;
+    opacity: 0.6;
+}
+
+.toggle-password {
+    color: var(--btn-other-hover);
+}
+
+.toggle-password:hover {
+    opacity: 1;
 }
 
 
@@ -140,53 +118,29 @@ button:hover {
 
 .container-register {
     background: #f5f5f5;
-    width: 330px;
-    height: 46px;
+    width: 300px;
+    height: 50px;
     padding: 16px;
-    margin: 16px 0px 0px;
     text-align: center;
     border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 20px 50px #C1C1C1;
 }
 
-.container-register a{
+.container-register p {
+    margin-bottom: 0;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-sm);
+    
+}
+.container-register a {
     color: #4E06E6;
     text-decoration: none;
-    font-size: 14px;   
+    font-size: 14px;
     font-weight: 600;
 }
+
 .container-register a:hover {
-    text-decoration: underline ;
-}
-
-
-footer {
-    height: 18px;
-    width: auto;
-    padding: 40px 16px;
-    margin: 40px 19px 0px;
-
-}
-
-.container-footer ul {
-    width: auto;
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 2rem;
-    background: transparent;
-}
-
-.container-footer ul a{
-    text-decoration: none;
-    color: #848d97;
-    font-size: 12px;
-}
-
-.container-footer ul a:hover {
-    color: #4E06E6;
-    text-decoration: underline ;
+    text-decoration: underline;
 }
