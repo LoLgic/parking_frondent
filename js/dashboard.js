@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchOverlay = document.getElementById("searchOverlay");
   const closeSearch = document.getElementById("closeSearch");
 
+
   if (searchBtn && searchOverlay && closeSearch) {
     searchBtn.addEventListener("click", () => {
       searchOverlay.classList.add("active");
@@ -27,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   // -------------------------------
   //  🔹 AUTO CARGAR VEHÍCULOS AL INICIAR SESIÓN
   // -------------------------------
@@ -45,9 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       else link.classList.remove("active");
     });
   }
-
-
-
 
   // -------------------------------
   //  MENÚ DE USUARIO (AVATAR)
@@ -103,36 +100,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------
-  //  FUNCIÓN: CARGAR VEHÍCULOS
+  // FUNCIÓN: CARGAR VEHÍCULOS (CON FILTRO)
   // -------------------------------
-  async function cargarVehiculos() {
+  async function cargarVehiculos(tipo = "TODOS") {
     const listContainer = document.getElementById("vehiculos-list");
+    const token = localStorage.getItem("token");
+
     if (!listContainer) {
-      console.warn("No se encontró el contenedor #vehiculos-list");
+      console.error("No se encontró el contenedor #vehiculos-list");
       return;
     }
 
-    listContainer.innerHTML = `<p class="cargando">Cargando vehículos...</p>`;
-
-    const token = localStorage.getItem("token");
     if (!token) {
       listContainer.innerHTML = `<p style="color:red;">No se encontró el token. Por favor, inicia sesión nuevamente.</p>`;
       return;
     }
 
+    listContainer.innerHTML = `<p>Cargando vehículos...</p>`;
+
+    let url = "http://localhost:8081/api/vehiculos/mios";
+    if (tipo !== "TODOS") {
+      url += `/tipo/${tipo}`;
+    }
+
     try {
-      const res = await fetch("http://localhost:8081/api/vehiculos/mios", {
+      const res = await fetch(url, {
         headers: { "Authorization": `Bearer ${token}` }
       });
 
       if (!res.ok) throw new Error("Error al obtener los vehículos");
       const data = await res.json();
 
-      // Limpia el contenedor antes de agregar nuevas tarjetas
       listContainer.innerHTML = "";
 
       if (!data || data.length === 0) {
-        listContainer.innerHTML = `<p class="sin-vehiculos">No tienes vehículos registrados.</p>`;
+        listContainer.innerHTML = `<p class="sin-vehiculos">No tienes vehículos registrados de este tipo.</p>`;
         return;
       }
 
@@ -143,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="vehiculo-info">
           <h3><strong>Tipo:</strong> ${v.tipo}</h3>
           <p><strong>Placa:</strong> ${v.placa}</p>
-          <p><strong>Propietario:</strong> ${v.propietario || "—"}</p>
+          <p><strong>Propietario:</strong> ${v.propietario}</p>
         </div>
         <button class="btn-eliminar" data-id="${v.idVehiculo}">Eliminar</button>
       `;
@@ -154,7 +156,27 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error cargando vehículos:", err);
       listContainer.innerHTML = `<p style="color:red;">Error al cargar los vehículos.</p>`;
     }
+
+    // -------------------------------
+    // EVENTOS: FILTRO DE VEHÍCULOS
+    // -------------------------------
+    document.addEventListener("click", (e) => {
+      // Verificar si se hizo clic en un botón de filtro
+      const btn = e.target.closest(".filtro-btn");
+      if (!btn) return;
+
+      const tipo = btn.dataset.tipo;
+
+      // Actualiza el estilo del botón activo
+      document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Llama a la función de carga con el tipo seleccionado
+      cargarVehiculos(tipo);
+    });
+
   }
+
 
 
   // Validación adicional en JavaScript

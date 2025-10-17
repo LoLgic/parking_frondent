@@ -90,7 +90,21 @@
                         </div>
                         <button class="btn-agregar"><i class="fa-solid fa-plus"></i>Nuevo vehículo</button>
                     </div>
-                    
+
+                    <!-- 🔹 NAVBAR DE FILTROS -->
+                    <nav class="vehiculos-navbar">
+                        <ul>
+                            <li><button class="filtro-btn active" data-tipo="TODOS"><i class="fa-solid fa-list"></i>
+                                    Todos</button></li>
+                            <li><button class="filtro-btn" data-tipo="CARRO"><i class="fa-solid fa-car"></i>
+                                    Carro</button></li>
+                            <li><button class="filtro-btn" data-tipo="MOTO"><i class="fa-solid fa-motorcycle"></i>
+                                    Moto</button></li>
+                            <li><button class="filtro-btn" data-tipo="BICICLETA"><i class="fa-solid fa-bicycle"></i>
+                                    Bicicleta</button></li>
+                        </ul>
+                    </nav>
+
                     <div id="vehiculos-list" class="vehiculos-list">
                         <!-- Aquí se insertarán las tarjetas dinámicamente -->
                     </div>
