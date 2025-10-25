@@ -231,10 +231,6 @@
   background-color: var(--bg);
 }
 
-.main-content.tickets {
-  background-color: #8cf783;
-}
-
 .main-content.pagos {
   background-color: #e787f5;
 }
@@ -415,33 +411,45 @@
 /* ===================*/
 /* ==== Vehículos ==== */
 /* ====================*/
-.vehiculos-container {
+.vehiculos-container,
+.reserva-container {
   padding: 2rem;
   color: var(--text-primary);
 }
 
-.vehiculos-header {
+.vehiculos-header, 
+.reserva-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
   align-items: flex-start;
+  background: var(--warning);
+  padding: 20px;
+  height: 167px;
+  border-radius: 12px;
+  background-image: url("../img/bg-vehiculo4.webp");
+  object-fit: cover;
 }
 
-.vehiculos-header h1 {
+.vehiculos-header h1,  
+.reserva-header h1 {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
+  color: var(--bg-alt);
   color: var(--text-primary);
 }
 
-.vehiculos-titulo {
+.vehiculos-titulo,
+.reserva-titulo {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-.vehiculos-descripcion {
-  color: var(--text-secondary);
+.vehiculos-descripcion, 
+.reserva-decripcion {
+  color: var(--bg-alt-dark);
   font-size: var(--font-size-md);
   margin-top: 0.2rem;
   width: 650px;
@@ -450,20 +458,22 @@
 
 .btn-agregar {
   width: auto;
-  height: 44px;
+  height: 50px;
+  width: 190px;
   background: var(--btn-other);
   color: var(--bg);
   font-size: var(--font-size-base);
   border: none;
   padding: 10px 20px;
   margin-right: 40px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: 1px 1px 5px rgb(98 61 155 / 70%);
   transition: background 0.3s ease;
 }
 
@@ -472,7 +482,8 @@
 }
 
 /* Listado similar al de reservas */
-.vehiculos-list {
+.vehiculos-list, 
+.reserva-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -480,13 +491,15 @@
 }
 
 /* Tarjeta individual (idéntica visualmente a reserva-card) */
-.vehiculo-card {
+.vehiculo-card, 
+.reserva-card {
   height: 250px;
   width: 350px;
   background: var(--bg-alt);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -495,13 +508,15 @@
 }
 
 
-.vehiculo-info h3 {
+.vehiculo-info h3, 
+.reserva-info h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
   color: var(--text-primary);
 }
 
-.vehiculo-info p {
+.vehiculo-info p, 
+.reserva-info p {
   margin: 3px 0;
   color: var(--text-secondary);
 }
@@ -527,7 +542,8 @@
 }
 
 /* Mensaje cuando no hay vehículos */
-.sin-vehiculos {
+.sin-vehiculos, 
+.sin-reserva {
   text-align: center;
   color: var(--text-secondary);
   font-style: italic;
@@ -645,8 +661,6 @@
   color: var(--text-secondary);
 }
 
-
-
 /*####*/
 .vehiculos-navbar {
   margin: 2rem 0;
@@ -658,11 +672,21 @@
   padding: 0;
   display: flex;
   gap: 15px;
+
+  background: var(--bg-alt);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+  border-radius: 12px;
+  width: 400px;
+  height: 90px;
+  justify-content: center;
+  align-items: center;
 }
 
 .vehiculos-navbar .filtro-btn {
   border: none;
   border-radius: 8px;
+  width: auto;
   padding: 8px 14px;
   cursor: pointer;
   font-size: var(--font-size-base);
@@ -682,13 +706,58 @@
 .vehiculos-navbar .filtro-btn.active {
   background-color: var(--text-primary-dark);
   color: var(--text-primary);
-  
+  border: 2px solid var(--btn-other-hover);
 }
 /*
 .vehiculos-navbar .filtro-btn:hover {
   background-color: #e0e0e0;
 }*/
 /*####*/
+
+
+/* --- TOAST STYLES --- */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: #333;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background: #4caf50;
+}
+
+.toast.error {
+  background: #e53935;
+}
+
+.toast.info {
+  background: #2196f3;
+}
+
 
 /* Responsive */
 @media (max-width: 480px) {

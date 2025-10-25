@@ -1,3 +1,28 @@
+// -----------------------------------
+// 🔔 FUNCIÓN GLOBAL: MOSTRAR TOAST
+// -----------------------------------
+function showToast(message, type = "info") {
+  const container = document.getElementById("toastContainer");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.classList.add("toast", type);
+  toast.innerHTML = `
+    ${type === "success" ? "✅" : type === "error" ? "❌" : "ℹ️"} ${message}
+  `;
+  container.appendChild(toast);
+
+  // Forzar animación
+  setTimeout(() => toast.classList.add("show"), 50);
+
+  // Ocultar automáticamente
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // -------------------------------
   //  BUSCADOR OVERLAY
@@ -5,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBtn = document.querySelector(".search-btn");
   const searchOverlay = document.getElementById("searchOverlay");
   const closeSearch = document.getElementById("closeSearch");
-
 
   if (searchBtn && searchOverlay && closeSearch) {
     searchBtn.addEventListener("click", () => {
@@ -35,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContent = document.getElementById("mainContent");
 
   if (token && mainContent) {
-    document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+    document.querySelectorAll(".section").forEach((s) => (s.style.display = "none"));
     document.getElementById("sectionVehiculos").style.display = "block";
     cargarVehiculos();
 
@@ -82,10 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
         mainContent.className = "main-content " + section;
 
         // Ocultar todas las secciones
-        document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+        document.querySelectorAll(".section").forEach((s) => (s.style.display = "none"));
 
         // Mostrar solo la sección seleccionada
-        const sectionToShow = document.getElementById(`section${section.charAt(0).toUpperCase() + section.slice(1)}`);
+        const sectionToShow = document.getElementById(
+          `section${section.charAt(0).toUpperCase() + section.slice(1)}`
+        );
         if (sectionToShow) {
           sectionToShow.style.display = "block";
         }
@@ -94,13 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (section === "vehiculos") {
           await cargarVehiculos();
         }
-
       });
     });
   }
 
   // -------------------------------
-  // FUNCIÓN: CARGAR VEHÍCULOS (CON FILTRO)
+  // FUNCIÓN: CARGAR VEHÍCULOS (CON FILTRO Y ELIMINACIÓN)
   // -------------------------------
   async function cargarVehiculos(tipo = "TODOS") {
     const listContainer = document.getElementById("vehiculos-list");
@@ -125,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(url, {
-        headers: { "Authorization": `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!res.ok) throw new Error("Error al obtener los vehículos");
@@ -138,54 +163,97 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      data.forEach(v => {
+      data.forEach((v) => {
         const card = document.createElement("div");
         card.classList.add("vehiculo-card");
         card.innerHTML = `
-        <div class="vehiculo-info">
-          <h3><strong>Tipo:</strong> ${v.tipo}</h3>
-          <p><strong>Placa:</strong> ${v.placa}</p>
-          <p><strong>Propietario:</strong> ${v.propietario}</p>
-        </div>
-        <button class="btn-eliminar" data-id="${v.idVehiculo}">Eliminar</button>
-      `;
+          <div class="vehiculo-info">
+            <h3><strong>Tipo:</strong> ${v.tipo}</h3>
+            <p><strong>Placa:</strong> ${v.placa}</p>
+            <p><strong>Propietario:</strong> ${v.propietario}</p>
+          </div>
+          <button class="btn-eliminar" data-id="${v.idVehiculo}">Eliminar</button>
+        `;
         listContainer.appendChild(card);
       });
 
+      // EVENTO: ELIMINAR VEHÍCULO
+      listContainer.querySelectorAll(".btn-eliminar").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const id = btn.dataset.id;
+          const confirmar = confirm("¿Estás seguro de eliminar este vehículo?");
+          if (!confirmar) return;
+
+          try {
+            const res = await fetch(`http://localhost:8081/api/vehiculos/${id}`, {
+              method: "DELETE",
+              headers: {
+                "Authorization": `Bearer ${token}`,
+              },
+            });
+
+            // Respuesta no exitosa
+            if (!res.ok) {
+              const errorText = await res.text();
+              console.warn("Error al eliminar vehículo:", errorText);
+
+              try {
+                const errorObj = JSON.parse(errorText);
+                if (errorObj?.codigo === "E008") {
+                  showToast("El vehículo no se puede eliminar porque tiene un ticket o reserva activa.", "info");
+                  btn.closest(".vehiculo-card")?.remove();
+                  return;
+                }
+              } catch {
+                // No es JSON válido, continuar con error genérico
+              }
+
+              throw new Error("Error al eliminar el vehículo");
+            }
+
+            // Si la eliminación fue exitosa
+            btn.closest(".vehiculo-card")?.remove();
+            showToast("Vehículo eliminado correctamente ✅", "success");
+
+          } catch (err) {
+            console.error("Error al eliminar vehículo:", err);
+            showToast("Error al eliminar el vehículo.", "error");
+          }
+        });
+      });
     } catch (err) {
       console.error("Error cargando vehículos:", err);
       listContainer.innerHTML = `<p style="color:red;">Error al cargar los vehículos.</p>`;
     }
+  }
 
-    // -------------------------------
-    // EVENTOS: FILTRO DE VEHÍCULOS
-    // -------------------------------
+  // -------------------------------
+  // NAVBAR DE FILTROS VEHÍCULOS (usa HTML estático)
+  // -------------------------------
+  if (!window.filtroVehiculosInicializado) {
     document.addEventListener("click", (e) => {
-      // Verificar si se hizo clic en un botón de filtro
       const btn = e.target.closest(".filtro-btn");
       if (!btn) return;
 
       const tipo = btn.dataset.tipo;
-
-      // Actualiza el estilo del botón activo
-      document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".filtro-btn").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Llama a la función de carga con el tipo seleccionado
+      console.log("Filtro seleccionado:", tipo);
       cargarVehiculos(tipo);
     });
 
+    window.filtroVehiculosInicializado = true;
   }
 
-
-
-  // Validación adicional en JavaScript
-  document.getElementById("vehiculoForm").addEventListener("submit", (e) => {
+  // -------------------------------
+  // VALIDACIÓN: PLACA DE 6 CARACTERES
+  // -------------------------------
+  document.getElementById("vehiculoForm")?.addEventListener("submit", (e) => {
     const placaInput = document.getElementById("placa");
     const placa = placaInput.value.trim().toUpperCase();
     const mensaje = document.getElementById("vehiculoMessage");
 
-    // Evitar que se envíe si la placa no cumple
     if (!/^[A-Z0-9]{6}$/.test(placa)) {
       e.preventDefault();
       mensaje.textContent = "La placa debe tener exactamente 6 caracteres alfanuméricos (sin espacios).";
@@ -194,9 +262,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Si es válida, limpiar mensaje y permitir envío
     mensaje.textContent = "";
-    placaInput.value = placa; // Normaliza a mayúsculas
+    placaInput.value = placa;
   });
 
   // -------------------------------
@@ -226,13 +293,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
   }
 
-  // Abrir modal (delegación porque el botón se crea dinámicamente)
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".btn-agregar");
     if (btn) openModal();
   });
 
-  // Cerrar modal
   btnCancel?.addEventListener("click", closeModal);
   btnClose?.addEventListener("click", closeModal);
   modal?.addEventListener("click", (e) => {
@@ -271,9 +336,9 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ placa, tipo })
+        body: JSON.stringify({ placa, tipo }),
       });
 
       if (!res.ok) {
@@ -284,7 +349,6 @@ document.addEventListener("DOMContentLoaded", () => {
       msg.textContent = "Vehículo registrado correctamente ✅";
       await cargarVehiculos();
       setTimeout(closeModal, 700);
-
     } catch (err) {
       console.error("Error registrar vehículo:", err);
       msg.textContent = `Error: ${err.message}`;

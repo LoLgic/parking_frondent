@@ -63,9 +63,6 @@
         <!-- Sidebar de navegación -->
         <aside class="sidebar">
             <nav>
-                <!--
-                <a href="#" class="nav-link active" data-section="reservas"><i class="fa-solid fa-list-ul"></i>Reservas</a>
-                -->
                 <a href="#" class="nav-link active" data-section="vehiculos"><i
                         class="fas fa-car-side"></i>Vehículos</a>
                 <a href="#" class="nav-link" data-section="reservas"><i class="fa-solid fa-ticket"></i>Reservas</a>
@@ -88,6 +85,7 @@
                                 utilices.
                             </p>
                         </div>
+
                         <button class="btn-agregar"><i class="fa-solid fa-plus"></i>Nuevo vehículo</button>
                     </div>
 
@@ -111,11 +109,43 @@
                 </div>
             </section>
 
-            <!-- Sección Tickets -->
-            <section class="section tickets-section" id="sectionTickets" hidden style="display: none;">
-                <h1>Reservas</h1>
-                <p>Aquí podrás consultar tus Reservas emitidos.</p>
+            <!-- 🔹 SECCIÓN RESERVAS -->
+            <section class="section reserva-section" id="sectionReservas" hidden style="display:none;">
+                <div class="reserva-container">
+                    <!-- 🔹 Encabezado -->
+                    <div class="reserva-header">
+                        <div class="reserva-titulo">
+                            <h1>Mis Reservas</h1>
+                            <p class="reserva-descripcion">Administra y consulta tus reservas activas, pendientes o
+                                finalizadas.</p>
+                        </div>
+                        <button id="btnAgregarReserva" class="btn-agregar">
+                            <i class="fa-solid fa-plus"></i> Crear reserva
+                        </button>
+                    </div>
+
+                    <!-- 🔹 Filtro -->
+                    <div class="reserva-filtro">
+                        <h3>Filtrar por estado</h3>
+                        <select id="filtroReserva" class="select-estado">
+                            <option value="todos" selected>Todos</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="confirmada">Confirmada</option>
+                            <option value="cancelada">Cancelada</option>
+                            <option value="expirada">Expirada</option>
+                        </select>
+                    </div>
+
+                    <!-- 🔹 Lista de Reservas -->
+                    <div id="reservaList" class="reservas-list">
+                        <!-- Tarjetas generadas dinámicamente -->
+                    </div>
+                </div>
             </section>
+
+            <!-- 🔹 Contenedor para los toasts -->
+            <div id="toastContainer" class="toast-container"></div>
+
 
             <!-- Sección Pagos -->
             <section class="section pagos-section" id="sectionPagos" hidden style="display: none;">
@@ -165,33 +195,9 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer-container" id="contacto">
-            <!-- Logo o Nombre -->
-            <a href="#" class="footer-logo">Park<span>ea</span></a>
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
 
-            <!-- Navegación rápida -->
-            <ul class="footer-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#about">Acerca de</a></li>
-                <li><a href="#precio">Precios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-
-            <!-- Redes Sociales -->
-            <div class="footer-social">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            </div>
-
-
-            <!-- Derechos -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 Parkea. Todos los derechos reservados.</p>
-            </div>
-    </footer>
     <script src="js/dashboard.js"></script>
 </body>
 
