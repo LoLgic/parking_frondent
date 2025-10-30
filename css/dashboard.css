@@ -26,7 +26,8 @@
 }
 
 .icon-btn i {
-  color: var(--bg-alt-dark);;
+  color: var(--bg-alt-dark);
+  ;
   font-size: var(--font-size-xl);
   transition: color 0.3s ease;
 }
@@ -35,7 +36,7 @@
   width: 40px;
 }
 
-.icon-btn  i:hover {
+.icon-btn i:hover {
   color: var(--btn-other-hover);
 }
 
@@ -59,7 +60,7 @@
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   min-width: 180px;
   z-index: 1000;
   flex-direction: column;
@@ -94,7 +95,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--bg-alt-dark);;
+  background: var(--bg-alt-dark);
+  ;
   font-size: var(--font-size-xl);
   color: var(--bg);
   object-fit: cover;
@@ -102,7 +104,8 @@
 
 /* --- Responsive --- */
 .search-btn {
-  display: none; /* oculta la lupa por defecto */
+  display: none;
+  /* oculta la lupa por defecto */
 }
 
 /* Overlay oculto por defecto */
@@ -116,7 +119,7 @@
   background: rgba(28, 33, 41, 0.95);
   z-index: 2000;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .search-overlay.active {
@@ -128,13 +131,13 @@
   position: relative;
   width: 90%;
   max-width: 500px;
-   margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .search-box input {
   width: 100%;
   padding: 12px 50px 12px 15px;
- 
+
   font-size: 1rem;
   border: none;
   border-radius: 25px;
@@ -159,7 +162,8 @@
 .dashboard {
   display: flex;
   height: 100vh;
-  margin-top: 70px; /* espacio del header */
+  margin-top: 70px;
+  /* espacio del header */
 }
 
 /* Sidebar */
@@ -193,7 +197,7 @@
 
 .sidebar .sigout {
   margin-top: 35vh;
-} 
+}
 
 .sidebar a {
   width: 230px;
@@ -242,14 +246,14 @@
   transform: scale(1.1);
   font-size: var(--font-size-md);
   color: var(--btn-other-hover);
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   font-weight: var(--font-weight-bold);
   width: 220px;
-  
+
 }
 
 .sidebar a.active i {
-  
+
   color: var(--btn-other-hover);
 }
 
@@ -332,11 +336,21 @@
 }
 
 /* Contenido de reservas */
-.reservas-contenido {
+.reservas-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reservas-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-content: space-between;
   gap: 1rem;
 }
 
@@ -346,7 +360,7 @@
   background: var(--bg-alt);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -417,7 +431,17 @@
   color: var(--text-primary);
 }
 
-.vehiculos-header, 
+.reserva-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px 35px;
+}
+
+.vehiculos-header,
 .reserva-header {
   display: flex;
   justify-content: space-between;
@@ -432,7 +456,7 @@
   object-fit: cover;
 }
 
-.vehiculos-header h1,  
+.vehiculos-header h1,
 .reserva-header h1 {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
@@ -447,7 +471,7 @@
   gap: 0.3rem;
 }
 
-.vehiculos-descripcion, 
+.vehiculos-descripcion,
 .reserva-decripcion {
   color: var(--bg-alt-dark);
   font-size: var(--font-size-md);
@@ -481,8 +505,31 @@
   background-color: var(--btn-other-hover);
 }
 
+
+/* Filtro */
+.reserva-filtro {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.reserva-filtro h3 {
+  font-size: var(--font-size-md);
+  color: var(--bg-alt-dark);
+  margin: 0;
+}
+
+
+.select-estado {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--bg-alt-dark);
+  font-size: var(--font-size-base);
+}
+
 /* Listado similar al de reservas */
-.vehiculos-list, 
+.vehiculos-list,
 .reserva-list {
   display: flex;
   flex-direction: row;
@@ -491,15 +538,15 @@
 }
 
 /* Tarjeta individual (idéntica visualmente a reserva-card) */
-.vehiculo-card, 
+.vehiculo-card,
 .reserva-card {
   height: 250px;
   width: 350px;
   background: var(--bg-alt);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -508,14 +555,14 @@
 }
 
 
-.vehiculo-info h3, 
+.vehiculo-info h3,
 .reserva-info h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
   color: var(--text-primary);
 }
 
-.vehiculo-info p, 
+.vehiculo-info p,
 .reserva-info p {
   margin: 3px 0;
   color: var(--text-secondary);
@@ -542,7 +589,7 @@
 }
 
 /* Mensaje cuando no hay vehículos */
-.sin-vehiculos, 
+.sin-vehiculos,
 .sin-reserva {
   text-align: center;
   color: var(--text-secondary);
@@ -553,18 +600,21 @@
 
 /* Modal base */
 .modal {
-  display: none; /* visible cuando .is-open */
+  display: none;
+  /* visible cuando .is-open */
   position: fixed;
   inset: 0;
   z-index: 2200;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
   padding: 2rem;
 }
 
 /* Modal visible */
-.modal.is-open { display: flex; }
+.modal.is-open {
+  display: flex;
+}
 
 /* Contenido */
 .modal-content {
@@ -574,7 +624,7 @@
   color: var(--text-primary, #1C2129);
   border-radius: 12px;
   padding: 1.6rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
@@ -674,8 +724,8 @@
   gap: 15px;
 
   background: var(--bg-alt);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
   border-radius: 12px;
   width: 400px;
   height: 90px;
@@ -708,6 +758,7 @@
   color: var(--text-primary);
   border: 2px solid var(--btn-other-hover);
 }
+
 /*
 .vehiculos-navbar .filtro-btn:hover {
   background-color: #e0e0e0;
@@ -761,18 +812,24 @@
 
 /* Responsive */
 @media (max-width: 480px) {
-  .modal-content { width: 100%; padding: 1rem; border-radius: 8px; }
+  .modal-content {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+  }
 }
 
 
 /* En pantallas pequeñas */
 @media (max-width: 768px) {
   .search-container {
-    display: none; /* oculta input */
+    display: none;
+    /* oculta input */
   }
 
   .search-btn {
-    display: inline-block; /* muestra la lupa */
+    display: inline-block;
+    /* muestra la lupa */
   }
 }
 

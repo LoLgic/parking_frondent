@@ -1,15 +1,14 @@
+// dashboard.js (versión corregida)
 // -----------------------------------
-// 🔔 FUNCIÓN GLOBAL: MOSTRAR TOAST
+// 🔔 TOAST GLOBAL (esquina inferior derecha)
 // -----------------------------------
 function showToast(message, type = "info") {
   const container = document.getElementById("toastContainer");
   if (!container) return;
 
   const toast = document.createElement("div");
-  toast.classList.add("toast", type);
-  toast.innerHTML = `
-    ${type === "success" ? "✅" : type === "error" ? "❌" : "ℹ️"} ${message}
-  `;
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `${type === "success" ? "✅" : type === "error" ? "❌" : "ℹ️"} ${message}`;
   container.appendChild(toast);
 
   // Forzar animación
@@ -22,10 +21,12 @@ function showToast(message, type = "info") {
   }, 3000);
 }
 
-
+// -----------------------------------
+// 🧩 EVENTO PRINCIPAL
+// -----------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   // -------------------------------
-  //  BUSCADOR OVERLAY
+  // 🔍 BUSCADOR OVERLAY
   // -------------------------------
   const searchBtn = document.querySelector(".search-btn");
   const searchOverlay = document.getElementById("searchOverlay");
@@ -53,44 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------
-  //  🔹 AUTO CARGAR VEHÍCULOS AL INICIAR SESIÓN
+  // 🔹 VARIABLES GLOBALES (referencias DOM)
   // -------------------------------
-  const token = localStorage.getItem("token");
   const mainContent = document.getElementById("mainContent");
-
-  if (token && mainContent) {
-    document.querySelectorAll(".section").forEach((s) => (s.style.display = "none"));
-    document.getElementById("sectionVehiculos").style.display = "block";
-    cargarVehiculos();
-
-    const navLinks = document.querySelectorAll(".nav-link");
-    navLinks.forEach((link) => {
-      if (link.dataset.section === "vehiculos") link.classList.add("active");
-      else link.classList.remove("active");
-    });
-  }
+  const modal = document.getElementById("vehiculoModal");
+  const form = document.getElementById("vehiculoForm");
+  const msgVehiculo = document.getElementById("vehiculoMessage");
 
   // -------------------------------
-  //  MENÚ DE USUARIO (AVATAR)
-  // -------------------------------
-  const avatar = document.querySelector(".user-avatar");
-  const dropdown = document.querySelector(".dropdown-menu");
-
-  if (avatar && dropdown) {
-    avatar.addEventListener("click", (e) => {
-      e.stopPropagation();
-      dropdown.classList.toggle("active");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!dropdown.contains(e.target) && !avatar.contains(e.target)) {
-        dropdown.classList.remove("active");
-      }
-    });
-  }
-
-  // -------------------------------
-  //  NAVEGACIÓN LATERAL
+  // 🔹 NAVEGACIÓN LATERAL (sidebar)
   // -------------------------------
   const navLinks = document.querySelectorAll(".nav-link");
 
@@ -99,67 +71,138 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", async (e) => {
         e.preventDefault();
 
+        // actualizar estado visual
         navLinks.forEach((l) => l.classList.remove("active"));
         link.classList.add("active");
 
-        const section = link.dataset.section;
+        // cambiar clase de main para estilo
+        const section = link.dataset.section || "inicio";
         mainContent.className = "main-content " + section;
 
-        // Ocultar todas las secciones
+        // ocultar todas las secciones y mostrar la seleccionada
         document.querySelectorAll(".section").forEach((s) => (s.style.display = "none"));
+        const sectionId = `section${section.charAt(0).toUpperCase() + section.slice(1)}`;
+        const sectionToShow = document.getElementById(sectionId);
 
-        // Mostrar solo la sección seleccionada
-        const sectionToShow = document.getElementById(
-          `section${section.charAt(0).toUpperCase() + section.slice(1)}`
-        );
         if (sectionToShow) {
           sectionToShow.style.display = "block";
+        } else {
+          // fallback sencillo si no existe
+          mainContent.innerHTML = `<h1>${section.charAt(0).toUpperCase() + section.slice(1)}</h1>`;
         }
 
-        // Si es la sección de vehículos, recargar lista dinámica
-        if (section === "vehiculos") {
-          await cargarVehiculos();
+        // inicializar módulos según sección
+        try {
+          if (section === "vehiculos") {
+            await cargarVehiculos(); // carga con token si aplica
+          } else if (section === "reservas") {
+            inicializarReservas();
+          } else if (section === "pagos") {
+            // si tienes cargarPagos() la llamas aquí
+            // await cargarPagos();
+          }
+        } catch (err) {
+          console.error("Error inicializando sección:", section, err);
         }
       });
     });
   }
 
   // -------------------------------
-  // FUNCIÓN: CARGAR VEHÍCULOS (CON FILTRO Y ELIMINACIÓN)
+  // 🔹 AUTO CARGAR VEHÍCULOS AL INICIAR SESIÓN (si hay token)
+  // -------------------------------
+  (function autoLoadOnLogin() {
+    const token = localStorage.getItem("token");
+    if (!token || !mainContent) return;
+    // ocultar todas las secciones y mostrar vehiculos
+    document.querySelectorAll(".section").forEach((s) => (s.style.display = "none"));
+    const sec = document.getElementById("sectionVehiculos");
+    if (sec) sec.style.display = "block";
+
+    // marcar en sidebar
+    navLinks.forEach((link) => {
+      if (link.dataset.section === "vehiculos") link.classList.add("active");
+      else link.classList.remove("active");
+    });
+
+    // cargar
+    cargarVehiculos().catch((e) => console.error("Auto-load vehiculos error:", e));
+  })();
+
+  // -------------------------------
+  // 🔹 DELEGACIÓN: abrir modal nuevo vehículo (funciona aunque .btn-agregar sea dinámica)
+  // -------------------------------
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-agregar");
+    if (!btn) return;
+    // abrir modal
+    if (modal) {
+      form?.reset();
+      msgVehiculo && (msgVehiculo.textContent = "");
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      const tipoEl = document.getElementById("tipo");
+      if (tipoEl) tipoEl.focus();
+    }
+  });
+
+  // Cerrar modal: botones dentro del modal (delegado seguro)
+  document.addEventListener("click", (e) => {
+    const closeBtn = e.target.closest(".modal-close");
+    if (closeBtn && modal) closeModal();
+    const cancelBtn = e.target.closest("#vehiculoCancel");
+    if (cancelBtn && modal) closeModal();
+    // click fuera del contenido
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal?.classList.contains("is-open")) closeModal();
+  });
+
+  function closeModal() {
+    modal?.classList.remove("is-open");
+    modal?.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  // -------------------------------
+  // 🔹 FUNCIÓN: CARGAR VEHÍCULOS (con filtro y eliminación)
   // -------------------------------
   async function cargarVehiculos(tipo = "TODOS") {
     const listContainer = document.getElementById("vehiculos-list");
-    const token = localStorage.getItem("token");
-
     if (!listContainer) {
-      console.error("No se encontró el contenedor #vehiculos-list");
+      console.warn("No se encontró el contenedor #vehiculos-list");
       return;
     }
 
+    // leer token en el momento de la petición
+    const token = localStorage.getItem("token");
     if (!token) {
-      listContainer.innerHTML = `<p style="color:red;">No se encontró el token. Por favor, inicia sesión nuevamente.</p>`;
+      listContainer.innerHTML = `<p style="color:red;">No se encontró el token. Por favor, inicia sesión.</p>`;
       return;
     }
 
-    listContainer.innerHTML = `<p>Cargando vehículos...</p>`;
+    listContainer.innerHTML = `<p class="cargando">Cargando vehículos...</p>`;
 
     let url = "http://localhost:8081/api/vehiculos/mios";
-    if (tipo !== "TODOS") {
-      url += `/tipo/${tipo}`;
-    }
+    if (tipo && tipo !== "TODOS") url += `/tipo/${tipo}`;
 
     try {
       const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!res.ok) throw new Error("Error al obtener los vehículos");
-      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
 
+      const data = await res.json();
       listContainer.innerHTML = "";
 
-      if (!data || data.length === 0) {
-        listContainer.innerHTML = `<p class="sin-vehiculos">No tienes vehículos registrados de este tipo.</p>`;
+      if (!Array.isArray(data) || data.length === 0) {
+        listContainer.innerHTML = `<p class="sin-vehiculos">No tienes vehículos registrados.</p>`;
         return;
       }
 
@@ -170,54 +213,43 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="vehiculo-info">
             <h3><strong>Tipo:</strong> ${v.tipo}</h3>
             <p><strong>Placa:</strong> ${v.placa}</p>
-            <p><strong>Propietario:</strong> ${v.propietario}</p>
+            <p><strong>Propietario:</strong> ${v.propietario || "—"}</p>
           </div>
           <button class="btn-eliminar" data-id="${v.idVehiculo}">Eliminar</button>
         `;
         listContainer.appendChild(card);
       });
 
-      // EVENTO: ELIMINAR VEHÍCULO
+      // eventos eliminar (se agregan cada vez que se renderiza, no duplicados porque el contenedor se re-crea)
       listContainer.querySelectorAll(".btn-eliminar").forEach((btn) => {
-        btn.addEventListener("click", async () => {
+        btn.addEventListener("click", async (ev) => {
           const id = btn.dataset.id;
-          const confirmar = confirm("¿Estás seguro de eliminar este vehículo?");
-          if (!confirmar) return;
+          if (!confirm("¿Estás seguro de eliminar este vehículo?")) return;
 
           try {
+            const tokenNow = localStorage.getItem("token");
             const res = await fetch(`http://localhost:8081/api/vehiculos/${id}`, {
               method: "DELETE",
-              headers: {
-                "Authorization": `Bearer ${token}`,
-              },
+              headers: { Authorization: `Bearer ${tokenNow}` },
             });
 
-            // Respuesta no exitosa
             if (!res.ok) {
-              const errorText = await res.text();
-              console.warn("Error al eliminar vehículo:", errorText);
-
-              try {
-                const errorObj = JSON.parse(errorText);
-                if (errorObj?.codigo === "E008") {
-                  showToast("El vehículo no se puede eliminar porque tiene un ticket o reserva activa.", "info");
-                  btn.closest(".vehiculo-card")?.remove();
-                  return;
-                }
-              } catch {
-                // No es JSON válido, continuar con error genérico
+              const text = await res.text();
+              let errObj;
+              try { errObj = JSON.parse(text); } catch { errObj = null; }
+              if (errObj?.codigo === "E008") {
+                showToast("El vehículo ya fue eliminado o tiene reservas activas ⚠️", "info");
+                btn.closest(".vehiculo-card")?.remove();
+                return;
               }
-
-              throw new Error("Error al eliminar el vehículo");
+              throw new Error(`HTTP ${res.status}`);
             }
 
-            // Si la eliminación fue exitosa
             btn.closest(".vehiculo-card")?.remove();
             showToast("Vehículo eliminado correctamente ✅", "success");
-
           } catch (err) {
             console.error("Error al eliminar vehículo:", err);
-            showToast("Error al eliminar el vehículo.", "error");
+            showToast("Error al eliminar el vehículo ❌", "error");
           }
         });
       });
@@ -228,106 +260,48 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------
-  // NAVBAR DE FILTROS VEHÍCULOS (usa HTML estático)
+  // 🔹 NAVBAR FILTROS VEHÍCULOS (HTML estático en tu template)
+  //    Solo inicializamos evento global una vez para evitar fugas
   // -------------------------------
   if (!window.filtroVehiculosInicializado) {
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".filtro-btn");
       if (!btn) return;
-
       const tipo = btn.dataset.tipo;
       document.querySelectorAll(".filtro-btn").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-
-      console.log("Filtro seleccionado:", tipo);
       cargarVehiculos(tipo);
     });
-
     window.filtroVehiculosInicializado = true;
   }
 
   // -------------------------------
-  // VALIDACIÓN: PLACA DE 6 CARACTERES
-  // -------------------------------
-  document.getElementById("vehiculoForm")?.addEventListener("submit", (e) => {
-    const placaInput = document.getElementById("placa");
-    const placa = placaInput.value.trim().toUpperCase();
-    const mensaje = document.getElementById("vehiculoMessage");
-
-    if (!/^[A-Z0-9]{6}$/.test(placa)) {
-      e.preventDefault();
-      mensaje.textContent = "La placa debe tener exactamente 6 caracteres alfanuméricos (sin espacios).";
-      mensaje.style.color = "red";
-      placaInput.focus();
-      return;
-    }
-
-    mensaje.textContent = "";
-    placaInput.value = placa;
-  });
-
-  // -------------------------------
-  //  MODAL: REGISTRO VEHÍCULO
-  // -------------------------------
-  const modal = document.getElementById("vehiculoModal");
-  const form = document.getElementById("vehiculoForm");
-  const btnSubmit = document.getElementById("vehiculoSubmit");
-  const btnCancel = document.getElementById("vehiculoCancel");
-  const btnClose = modal?.querySelector(".modal-close");
-  const msg = document.getElementById("vehiculoMessage");
-
-  function openModal() {
-    if (!modal) return;
-    form.reset();
-    msg.textContent = "";
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    document.getElementById("tipo").focus();
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".btn-agregar");
-    if (btn) openModal();
-  });
-
-  btnCancel?.addEventListener("click", closeModal);
-  btnClose?.addEventListener("click", closeModal);
-  modal?.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal?.classList.contains("is-open")) closeModal();
-  });
-
-  // -------------------------------
-  //  SUBMIT: REGISTRAR VEHÍCULO
+  // 🔹 FORMULARIO: REGISTRAR VEHÍCULO
   // -------------------------------
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    msg.textContent = "";
+    msgVehiculo && (msgVehiculo.textContent = "");
 
-    const tipo = document.getElementById("tipo").value.trim();
-    const placa = document.getElementById("placa").value.trim().toUpperCase();
+    const tipo = document.getElementById("tipo")?.value?.trim();
+    const placa = document.getElementById("placa")?.value?.trim().toUpperCase();
 
     if (!tipo || !placa) {
-      msg.textContent = "Completa todos los campos.";
+      msgVehiculo && (msgVehiculo.textContent = "Completa todos los campos.");
       return;
     }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      msg.textContent = "No se encontró el token. Inicia sesión nuevamente.";
+    if (!/^[A-Z0-9]{6}$/.test(placa)) {
+      msgVehiculo && ((msgVehiculo.textContent = "La placa debe tener 6 caracteres alfanuméricos."), (msgVehiculo.style.color = "red"));
       return;
     }
 
+    const tokenNow = localStorage.getItem("token");
+    if (!tokenNow) {
+      msgVehiculo && (msgVehiculo.textContent = "Token no encontrado. Inicia sesión nuevamente.");
+      return;
+    }
+
+    const btnSubmit = document.getElementById("vehiculoSubmit");
     btnSubmit.disabled = true;
     btnSubmit.textContent = "Registrando...";
 
@@ -336,25 +310,150 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${tokenNow}`,
         },
         body: JSON.stringify({ placa, tipo }),
       });
 
       if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(errorText || "Error al registrar el vehículo");
+        let errText = await res.text();
+        try { errText = JSON.parse(errText).message || errText; } catch {}
+        throw new Error(errText || `HTTP ${res.status}`);
       }
 
-      msg.textContent = "Vehículo registrado correctamente ✅";
+      msgVehiculo && (msgVehiculo.textContent = "Vehículo registrado correctamente ✅");
       await cargarVehiculos();
-      setTimeout(closeModal, 700);
+      setTimeout(() => closeModal(), 700);
     } catch (err) {
       console.error("Error registrar vehículo:", err);
-      msg.textContent = `Error: ${err.message}`;
+      msgVehiculo && (msgVehiculo.textContent = `Error: ${err.message || err}`);
     } finally {
       btnSubmit.disabled = false;
       btnSubmit.textContent = "Registrar";
     }
   });
-});
+
+  // -------------------------------
+  // 🔹 RESERVAS (módulo con token)
+  // -------------------------------
+  function inicializarReservas() {
+    const reservaList = document.getElementById("reservaList");
+    const filtroReserva = document.getElementById("filtroReserva");
+    const btnAgregar = document.getElementById("btnAgregarReserva");
+    const API_BASE = "http://localhost:8081/api/reservas/mias";
+
+    if (!reservaList || !filtroReserva) {
+      console.warn("Módulo reservas: elementos no encontrados");
+      return;
+    }
+    if (filtroReserva.dataset.inicializado === "true") return;
+    filtroReserva.dataset.inicializado = "true";
+
+    // carga inicial
+    cargarReservas();
+
+    filtroReserva.addEventListener("change", async () => {
+      const estado = filtroReserva.value;
+      if (estado === "todos") await cargarReservas();
+      else await cargarReservas(estado.toUpperCase());
+    });
+
+    btnAgregar?.addEventListener("click", () => {
+      showToast("Funcionalidad de creación de reservas próximamente 🚀", "info");
+    });
+
+    async function cargarReservas(estado = null) {
+      reservaList.innerHTML = `<p style="color:#777;">Cargando reservas...</p>`;
+
+      const tokenNow = localStorage.getItem("token");
+      if (!tokenNow) {
+        showToast("Token no encontrado. Inicia sesión nuevamente ❌", "error");
+        reservaList.innerHTML = `<p style="color:red;">Token no encontrado.</p>`;
+        return;
+      }
+
+      try {
+        const url = estado ? `${API_BASE}/estado/${estado}` : API_BASE;
+        const response = await fetch(url, {
+          headers: { Authorization: `Bearer ${tokenNow}`, "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
+        const data = await response.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          reservaList.innerHTML = `<p style="color:#777;">No hay reservas ${estado ? "con estado " + estado : ""}.</p>`;
+          return;
+        }
+
+        renderReservas(data);
+      } catch (error) {
+        console.error("Error al obtener reservas:", error);
+        reservaList.innerHTML = `<p style="color:#d9534f;">Error al cargar las reservas.</p>`;
+        showToast("Error al cargar las reservas ❌", "error");
+      }
+    }
+
+    function renderReservas(lista) {
+      reservaList.innerHTML = "";
+      lista.forEach((r) => {
+        const fechaInicio = formatearFecha(r.fechaInicio);
+        const fechaFin = formatearFecha(r.fechaFin);
+        const card = document.createElement("div");
+        card.classList.add("reserva-card");
+        card.innerHTML = `
+          <div>
+            <h4>Espacio ${r.idReserva}</h4>
+            <h4>Espacio ${r.codigoEspacio}</h4>
+            <p><strong>Usuario:</strong> ${r.nombreUsuario}</p>
+            <p><strong>Vehículo:</strong> ${r.placaVehiculo}</p>
+            <p><strong>Inicio:</strong> ${fechaInicio}</p>
+            <p><strong>Fin:</strong> ${fechaFin}</p>
+            <span class="estado ${r.estado.toLowerCase()}">${r.estado}</span>
+          </div>
+          <div class="card-actions">
+            <button class="btn-eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        `;
+        card.querySelector(".btn-eliminar").addEventListener("click", () => eliminarReserva(r.idReserva));
+        reservaList.appendChild(card);
+      });
+    }
+
+    async function eliminarReserva(idReserva) {
+      if (!confirm("¿Seguro que deseas eliminar esta reserva?")) return;
+      const tokenNow = localStorage.getItem("token");
+      try {
+        const response = await fetch(`http://localhost:8081/api/reservas/${idReserva}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${tokenNow}`, "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+          showToast("Reserva eliminada correctamente ✅", "success");
+          // recargar con filtro actual
+          const estado = filtroReserva.value;
+          if (estado === "todos") await cargarReservas();
+          else await cargarReservas(estado.toUpperCase());
+        } else {
+          const errorData = await response.json();
+          console.error("Error al eliminar reserva:", errorData);
+          showToast(errorData.mensaje || "Error al eliminar la reserva ❌", "error");
+        }
+      } catch (error) {
+        console.error("Error de red:", error);
+        showToast("Error de conexión al eliminar la reserva ❌", "error");
+      }
+    }
+
+    function formatearFecha(fechaIso) {
+      const fecha = new Date(fechaIso);
+      return fecha.toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short", hour12: false });
+    }
+  } // fin inicializarReservas
+
+  // -------------------------------
+  // FIN DOMContentLoaded
+  // -------------------------------
+}); // end DOMContentLoaded
+
