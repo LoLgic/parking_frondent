@@ -354,23 +354,6 @@
   gap: 1rem;
 }
 
-.reserva-card {
-  height: 250px;
-  width: 550px;
-  background: var(--bg-alt);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  transition: transform 0.2s ease;
-}
-
-.reserva-card:hover {
-  /*transform: translateY(-3px);*/
-}
-
 .reserva-info h2 {
   margin-bottom: 10px;
   color: var(--text-primary);
@@ -432,7 +415,7 @@
 }
 
 .reserva-container {
-  width: 95%;
+  width: 100%;
   max-width: 1200px;
   margin: 30px auto;
   background-color: #fff;
@@ -472,7 +455,7 @@
 }
 
 .vehiculos-descripcion,
-.reserva-decripcion {
+.reserva-descripcion {
   color: var(--bg-alt-dark);
   font-size: var(--font-size-md);
   margin-top: 0.2rem;
@@ -520,7 +503,6 @@
   margin: 0;
 }
 
-
 .select-estado {
   padding: 8px 12px;
   border-radius: 6px;
@@ -529,17 +511,101 @@
 }
 
 /* Listado similar al de reservas */
-.vehiculos-list,
-.reserva-list {
+.vehiculos-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-/* Tarjeta individual (idéntica visualmente a reserva-card) */
-.vehiculo-card,
+.reservas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
 .reserva-card {
+  background: var(--bg-alt);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 380px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+/*
+.reserva-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}*/
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-header h2 {
+  font-size: var(--font-size-lg);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.estado {
+  padding: 3px 6px;
+  border-radius: 0px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-primary-dark);
+  text-transform: uppercase;
+}
+
+.estado.ACTIVA {
+  background-color: var(--success);
+}
+
+.estado.EXPIRADA {
+  background-color: var(--error);
+}
+
+.estado.PENDIENTE {
+  background-color: var(--warning);
+  color: var(--bg-alt-dark);
+}
+
+.detalle {
+  background: var(--text-primary-dark);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.detalle p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: var(--bg-alt-dark);
+}
+
+.detalle span {
+  font-weight: 600;
+  color: var(--bg-dark);
+}
+
+.footer {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+
+
+
+/* Tarjeta individual (idéntica visualmente a reserva-card) */
+.vehiculo-card {
   height: 250px;
   width: 350px;
   background: var(--bg-alt);
@@ -555,18 +621,20 @@
 }
 
 
-.vehiculo-info h3,
-.reserva-info h3 {
+.vehiculo-info h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
   color: var(--text-primary);
 }
 
-.vehiculo-info p,
-.reserva-info p {
+.vehiculo-info p {
   margin: 3px 0;
   color: var(--text-secondary);
 }
+
+
+
+
 
 /* Botón eliminar con estilo uniforme al de cancelar */
 .btn-eliminar {

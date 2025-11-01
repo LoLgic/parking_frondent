@@ -402,17 +402,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = document.createElement("div");
         card.classList.add("reserva-card");
         card.innerHTML = `
-          <div>
-            <h4>Espacio ${r.idReserva}</h4>
-            <h4>Espacio ${r.codigoEspacio}</h4>
-            <p><strong>Usuario:</strong> ${r.nombreUsuario}</p>
-            <p><strong>Vehículo:</strong> ${r.placaVehiculo}</p>
-            <p><strong>Inicio:</strong> ${fechaInicio}</p>
-            <p><strong>Fin:</strong> ${fechaFin}</p>
-            <span class="estado ${r.estado.toLowerCase()}">${r.estado}</span>
+          <div class="card-header">
+            <h2>Reserva #${r.idReserva}</h2>
+            <span class="estado ${r.estado}">${r.estado}</span>
+          </div>  
+
+          <div class="detalle">
+            <p><span>Usuario:</span> ${r.nombreUsuario}</p>
+            <p><span>Placa vehículo:</span> ${r.placaVehiculo}</p>
+            <p><span>Espacio:</span> ${r.codigoEspacio}</p>
+            <p><span>Fecha inicio:</span> ${r.fechaInicio}</p>
+            <p><span>Fecha fin:</span> ${r.fechaFin}</p>
+            ${r.observaciones ? `<p><span>Observaciones:</span> ${r.observaciones}</p>` : ""}
           </div>
+
           <div class="card-actions">
-            <button class="btn-eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            <button class="btn-eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i>Eliminar</button>
           </div>
         `;
         card.querySelector(".btn-eliminar").addEventListener("click", () => eliminarReserva(r.idReserva));
