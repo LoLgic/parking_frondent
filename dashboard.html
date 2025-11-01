@@ -113,27 +113,31 @@
             <section class="section reserva-section" id="sectionReservas" hidden style="display:none;">
                 <div class="reserva-container">
                     <!-- 🔹 Encabezado -->
-                    <div class="reserva-header">
+                    <div class="reserva-hero">
                         <div class="reserva-titulo">
                             <h1>Mis Reservas</h1>
                             <p class="reserva-descripcion">Administra y consulta tus reservas activas, pendientes o
                                 finalizadas.</p>
                         </div>
+
+                    </div>
+
+                    <div class="reserva-nav">
+                        <!-- 🔹 Filtro -->
+                        <div class="reserva-filtro">
+                            <h3>Filtrar por estado</h3>
+
+                            <select id="filtroReserva" class="select-estado">
+                                <option value="todos" selected>Todos</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="confirmada">Confirmada</option>
+                                <option value="cancelada">Cancelada</option>
+                                <option value="expirada">Expirada</option>
+                            </select>
+                        </div>
                         <button id="btnAgregarReserva" class="btn-agregar">
                             <i class="fa-solid fa-plus"></i> Crear reserva
                         </button>
-                    </div>
-
-                    <!-- 🔹 Filtro -->
-                    <div class="reserva-filtro">
-                        <h3>Filtrar por estado</h3>
-                        <select id="filtroReserva" class="select-estado">
-                            <option value="todos" selected>Todos</option>
-                            <option value="pendiente">Pendiente</option>
-                            <option value="confirmada">Confirmada</option>
-                            <option value="cancelada">Cancelada</option>
-                            <option value="expirada">Expirada</option>
-                        </select>
                     </div>
 
                     <!-- 🔹 Lista de Reservas -->

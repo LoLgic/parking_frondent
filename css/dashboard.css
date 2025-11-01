@@ -408,6 +408,16 @@
 /* ===================*/
 /* ==== Vehículos ==== */
 /* ====================*/
+.reserva-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  margin-bottom: 1rem;
+  margin-left: 40px;
+}
+
+
 .vehiculos-container,
 .reserva-container {
   padding: 2rem;
@@ -425,7 +435,7 @@
 }
 
 .vehiculos-header,
-.reserva-header {
+.reserva-hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -440,7 +450,7 @@
 }
 
 .vehiculos-header h1,
-.reserva-header h1 {
+.reserva-hero h1 {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--bg-alt);
@@ -462,30 +472,30 @@
   width: 650px;
 }
 
-
 .btn-agregar {
   width: auto;
-  height: 50px;
+  height: 40px;
   width: 190px;
-  background: var(--btn-other);
+  background-color: var(--btn-other-hover);
   color: var(--bg);
   font-size: var(--font-size-base);
   border: none;
   padding: 10px 20px;
   margin-right: 40px;
   border-radius: 12px;
-  font-weight: var(--font-weight-bold);
+  border-radius: 4px;
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 1px 1px 5px rgb(98 61 155 / 70%);
+  /*box-shadow: 1px 1px 5px rgb(98 61 155 / 70%);*/
   transition: background 0.3s ease;
 }
 
 .btn-agregar:hover {
-  background-color: var(--btn-other-hover);
+  background: var(--btn-other);
 }
 
 
@@ -494,7 +504,6 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 20px;
 }
 
 .reserva-filtro h3 {
@@ -601,9 +610,6 @@
   color: #777;
 }
 
-
-
-
 /* Tarjeta individual (idéntica visualmente a reserva-card) */
 .vehiculo-card {
   height: 250px;
@@ -620,7 +626,6 @@
   transition: transform 0.2s ease;
 }
 
-
 .vehiculo-info h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
@@ -631,10 +636,6 @@
   margin: 3px 0;
   color: var(--text-secondary);
 }
-
-
-
-
 
 /* Botón eliminar con estilo uniforme al de cancelar */
 .btn-eliminar {
@@ -877,6 +878,83 @@
   background: #2196f3;
 }
 
+
+/* TABLA RESERVA*/
+.tabla-reservas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+
+}
+
+.tabla-reservas th {
+  background-color: var(--bg-alt-dark);
+  color: var(--text-primary-dark);
+
+  color: var(--text-primary);
+  background: var(--bg);
+
+
+  text-align: left;
+  padding: 10px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.tabla-reservas td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--text-secondary-dark);
+  color: var(--text-secondary);
+}
+
+.tabla-reservas tr:hover {
+  background-color: #f9f9f9;
+}
+
+.tabla-reservas .estado {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: var(--font-weight-medium);
+  text-transform: capitalize;
+}
+
+.estado.pendiente {
+  background-color: var(--info);
+  color: var(--bg-alt);
+}
+
+.estado.aprobada {
+  background-color: var(--success);
+  color: var(--bg-alt);
+}
+
+.estado.cancelada {
+  background-color: var(--error);
+  color: var(--bg-alt);
+}
+
+.estado.expirada {
+  background-color: var(--warning);
+  color: var(--bg-alt);
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-editar {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-editar:hover {
+  color: #007bff;
+}
 
 /* Responsive */
 @media (max-width: 480px) {

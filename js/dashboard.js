@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!res.ok) {
         let errText = await res.text();
-        try { errText = JSON.parse(errText).message || errText; } catch {}
+        try { errText = JSON.parse(errText).message || errText; } catch { }
         throw new Error(errText || `HTTP ${res.status}`);
       }
 
@@ -395,35 +395,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderReservas(lista) {
+      // Limpiar contenedor
       reservaList.innerHTML = "";
+
+      // Crear tabla
+      const table = document.createElement("table");
+      table.classList.add("tabla-reservas");
+
+      // Crear encabezado
+      table.innerHTML = `
+    <thead>
+      <tr>
+        <th>ID Reserva</th>
+        <th>Estado</th>
+        <th>Placa del Vehículo</th>
+        <th>Código del Espacio</th>
+        <th>Fecha de Inicio</th>
+        <th>Fecha de Fin</th>
+        <th>Observaciones</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  `;
+
+      const tbody = table.querySelector("tbody");
+
+      // Verificar si hay reservas
+      if (!lista || lista.length === 0) {
+        reservaList.innerHTML = `<p class="sin-reservas">No hay reservas registradas.</p>`;
+        return;
+      }
+
+      // Llenar filas
       lista.forEach((r) => {
         const fechaInicio = formatearFecha(r.fechaInicio);
         const fechaFin = formatearFecha(r.fechaFin);
-        const card = document.createElement("div");
-        card.classList.add("reserva-card");
-        card.innerHTML = `
-          <div class="card-header">
-            <h2>Reserva #${r.idReserva}</h2>
-            <span class="estado ${r.estado}">${r.estado}</span>
-          </div>  
 
-          <div class="detalle">
-            <p><span>Usuario:</span> ${r.nombreUsuario}</p>
-            <p><span>Placa vehículo:</span> ${r.placaVehiculo}</p>
-            <p><span>Espacio:</span> ${r.codigoEspacio}</p>
-            <p><span>Fecha inicio:</span> ${r.fechaInicio}</p>
-            <p><span>Fecha fin:</span> ${r.fechaFin}</p>
-            ${r.observaciones ? `<p><span>Observaciones:</span> ${r.observaciones}</p>` : ""}
-          </div>
+        const row = document.createElement("tr");
+        row.innerHTML = `
+      <td>${r.idReserva}</td>
+      <td><span class="estado ${r.estado.toLowerCase()}">${r.estado}</span></td>
+      <td>${r.placaVehiculo}</td>
+      <td>${r.codigoEspacio}</td>
+      <td>${fechaInicio}</td>
+      <td>${fechaFin}</td>
+      <td>${r.observaciones || "-"}</td>
+      <td class="acciones">
+        <button class="btn-editar" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="btn-eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    `;
 
-          <div class="card-actions">
-            <button class="btn-eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i>Eliminar</button>
-          </div>
-        `;
-        card.querySelector(".btn-eliminar").addEventListener("click", () => eliminarReserva(r.idReserva));
-        reservaList.appendChild(card);
+        // Acción: Eliminar reserva
+        row.querySelector(".btn-eliminar").addEventListener("click", () => eliminarReserva(r.idReserva));
+
+        // Acción: Editar reserva (puedes implementar tu modal o acción aquí)
+        row.querySelector(".btn-editar").addEventListener("click", () => {
+          showToast(`Editar reserva #${r.idReserva} en desarrollo ✏️`, "info");
+        });
+
+        tbody.appendChild(row);
       });
+
+      reservaList.appendChild(table);
     }
+
 
     async function eliminarReserva(idReserva) {
       if (!confirm("¿Seguro que deseas eliminar esta reserva?")) return;
