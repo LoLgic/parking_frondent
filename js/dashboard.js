@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔹 DELEGACIÓN: abrir modal nuevo vehículo (funciona aunque .btn-agregar sea dinámica)
   // -------------------------------
   document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".btn-agregar");
+    const btn = e.target.closest(".btn-agregar-vehiculo");
     if (!btn) return;
     // abrir modal
     if (modal) {
@@ -142,8 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
-      const tipoEl = document.getElementById("tipo");
-      if (tipoEl) tipoEl.focus();
     }
   });
 
@@ -413,7 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <th>Fecha de Inicio</th>
         <th>Fecha de Fin</th>
         <th>Observaciones</th>
-        <th>Acciones</th>
+        <th>Cancelar</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -441,19 +439,15 @@ document.addEventListener("DOMContentLoaded", () => {
       <td>${fechaInicio}</td>
       <td>${fechaFin}</td>
       <td>${r.observaciones || "-"}</td>
-      <td class="acciones">
-        <button class="btn-editar" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
-        <button class="btn-eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+      <td class="cancelar">
+        <button class="btn-cancelar" title="Cancelar"><i class="fa-solid fa-square-xmark"></i></button>
       </td>
     `;
 
-        // Acción: Eliminar reserva
-        row.querySelector(".btn-eliminar").addEventListener("click", () => eliminarReserva(r.idReserva));
-
-        // Acción: Editar reserva (puedes implementar tu modal o acción aquí)
-        row.querySelector(".btn-editar").addEventListener("click", () => {
-          showToast(`Editar reserva #${r.idReserva} en desarrollo ✏️`, "info");
-        });
+        // Agregar evento solo si la reserva está pendiente
+        if (r.estado.toLowerCase() === "pendiente") {
+          row.querySelector(".btn-cancelar").addEventListener("click", () => eliminarReserva(r.idReserva));
+        }
 
         tbody.appendChild(row);
       });
@@ -461,38 +455,185 @@ document.addEventListener("DOMContentLoaded", () => {
       reservaList.appendChild(table);
     }
 
+    // -------------------------------
+    // MODAL NUEVA RESERVA
+    // -------------------------------
+    const modal = document.getElementById("modalReserva");
+    const btnAbrirModal = document.getElementById("btnAgregarReserva");
+    const btnCerrarModal = document.getElementById("closeModal");
+    const formReserva = document.getElementById("formReserva");
+    const selectVehiculo = document.getElementById("idVehiculo");
 
-    async function eliminarReserva(idReserva) {
-      if (!confirm("¿Seguro que deseas eliminar esta reserva?")) return;
-      const tokenNow = localStorage.getItem("token");
+    // 🔹 Abrir modal
+    btnAbrirModal.addEventListener("click", async () => {
+      modal.style.display = "block";
+      await cargarVehiculosSelect(); // cargar lista de vehículos
+    });
+
+    // 🔹 Cerrar modal
+    btnCerrarModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // 🔹 Cerrar al hacer clic fuera del contenido
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+
+    // -------------------------------
+    // CARGAR VEHÍCULOS EN EL SELECT
+    // -------------------------------
+    async function cargarVehiculosSelect() {
       try {
-        const response = await fetch(`http://localhost:8081/api/reservas/${idReserva}`, {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${tokenNow}`, "Content-Type": "application/json" },
+        const tokenNow = localStorage.getItem("token");
+        if (!tokenNow) {
+          showToast("Token no encontrado. Inicia sesión nuevamente ❌", "error");
+          return;
+        }
+
+        const response = await fetch("http://localhost:8081/api/vehiculos/mios", {
+          headers: {
+            "Authorization": `Bearer ${tokenNow}`,
+            "Content-Type": "application/json"
+          }
         });
 
-        if (response.ok) {
-          showToast("Reserva eliminada correctamente ✅", "success");
-          // recargar con filtro actual
-          const estado = filtroReserva.value;
-          if (estado === "todos") await cargarReservas();
-          else await cargarReservas(estado.toUpperCase());
-        } else {
-          const errorData = await response.json();
-          console.error("Error al eliminar reserva:", errorData);
-          showToast(errorData.mensaje || "Error al eliminar la reserva ❌", "error");
-        }
+        if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
+        const vehiculos = await response.json();
+
+
+        selectVehiculo.innerHTML = `<option value="">Seleccione su vehículo</option>`;
+
+        vehiculos.forEach((v) => {
+          const option = document.createElement("option");
+          option.value = v.idVehiculo;
+          option.textContent = `${v.idVehiculo} - ${v.placa}`;
+          selectVehiculo.appendChild(option);
+        });
       } catch (error) {
-        console.error("Error de red:", error);
-        showToast("Error de conexión al eliminar la reserva ❌", "error");
+        console.error("Error al cargar vehículos:", error);
+        showToast("⚠️ No se pudieron cargar los vehículos", "error");
       }
     }
+
+    // -------------------------------
+    // ENVIAR FORMULARIO NUEVA RESERVA
+    // -------------------------------
+    formReserva.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const tokenNow = localStorage.getItem("token");
+      if (!tokenNow) {
+        showToast("Token no encontrado. Inicia sesión nuevamente ❌", "error");
+        return;
+      }
+
+      const reserva = {
+        idVehiculo: parseInt(selectVehiculo.value),
+        fechaInicio: document.getElementById("fechaInicio").value,
+        fechaFin: document.getElementById("fechaFin").value,
+      };
+
+      try {
+        const response = await fetch("http://localhost:8081/api/reservas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenNow}`,
+          },
+          body: JSON.stringify(reserva),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP ${response.status}`);
+        }
+
+        showToast("✅ Reserva creada correctamente", "success");
+
+        // Cerrar modal y limpiar formulario
+        modal.style.display = "none";
+        formReserva.reset();
+
+        // Recargar tabla de reservas
+        await cargarReservas();
+
+      } catch (error) {
+        console.error("Error al crear reserva:", error);
+        showToast("❌ Error al crear la reserva", "error");
+      }
+    });
+
+
+    async function eliminarReserva(idReserva) {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          mostrarToast("No se encontró el token. Inicia sesión nuevamente.", "error");
+          return;
+        }
+
+        const response = await fetch(`http://localhost:8081/api/reservas/${idReserva}/cancelar`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error HTTP ${response.status}`);
+        }
+
+        mostrarToast("✅ Reserva cancelada exitosamente.", "success");
+
+        // Esperar un momento y actualizar lista
+        setTimeout(async () => {
+          await cargarReservas();
+        }, 800);
+
+      } catch (error) {
+        console.error("Error al eliminar reserva:", error.message || error);
+        mostrarToast("❌ No se pudo cancelar la reserva.", "error");
+      }
+    }
+
 
     function formatearFecha(fechaIso) {
       const fecha = new Date(fechaIso);
       return fecha.toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short", hour12: false });
     }
   } // fin inicializarReservas
+
+  // -------------------------------
+  // ✅ TOAST DE NOTIFICACIÓN
+  // -------------------------------
+  function mostrarToast(mensaje, tipo = "info") {
+    // Crear contenedor si no existe
+    let toastContainer = document.querySelector(".toast-container");
+    if (!toastContainer) {
+      toastContainer = document.createElement("div");
+      toastContainer.className = "toast-container";
+      document.body.appendChild(toastContainer);
+    }
+
+    // Crear el toast
+    const toast = document.createElement("div");
+    toast.className = `toast ${tipo}`;
+    toast.textContent = mensaje;
+
+    toastContainer.appendChild(toast);
+
+    // Animación de entrada
+    setTimeout(() => toast.classList.add("show"), 100);
+
+    // Desaparece luego de 3 segundos
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 500);
+    }, 3000);
+  }
+
+
 
   // -------------------------------
   // FIN DOMContentLoaded

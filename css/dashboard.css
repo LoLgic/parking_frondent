@@ -386,24 +386,20 @@
 }
 
 .btn-cancelar {
-  background: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
+  color: var(--error);
+  width: auto;
+  height: auto;
+
+  font-size: var(--font-size-2xl);
   cursor: pointer;
-  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 6px;
   transition: background 0.3s;
 }
 
 .btn-cancelar:hover {
-  background: #e43c3c;
+  color: #cf5555;
 }
-
-
 
 /* ===================*/
 /* ==== Vehículos ==== */
@@ -472,7 +468,7 @@
   width: 650px;
 }
 
-.btn-agregar {
+.btn-agregar-vehiculo, .btn-agregar-reserva {
   width: auto;
   height: 40px;
   width: 190px;
@@ -494,7 +490,7 @@
   transition: background 0.3s ease;
 }
 
-.btn-agregar:hover {
+.btn-agregar-vehiculo:hover, .btn-agregar-reserva:hover {
   background: var(--btn-other);
 }
 
@@ -905,8 +901,11 @@
 
 .tabla-reservas td {
   padding: 8px 10px;
+  width: auto;
+  height: 50px;
   border-bottom: 1px solid var(--text-secondary-dark);
   color: var(--text-secondary);
+  font-size: var(--font-size-sm);
 }
 
 .tabla-reservas tr:hover {
@@ -955,6 +954,123 @@
 .btn-editar:hover {
   color: #007bff;
 }
+
+
+/* 🔹 Modal general */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* 🔹 Contenedor del contenido */
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+/* 🔹 Botón de cerrar */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-btn:hover {
+  color: #d00;
+}
+
+/* 🔹 Campos del formulario */
+#formReserva label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#formReserva input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn-registrar {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-registrar:hover {
+  background-color: #0056b3;
+}
+
+
+#formReserva select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+/* 🔹 Contenedor de toasts (abajo a la derecha) */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 🔹 Estilo base */
+.toast {
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+/* 🔹 Animación */
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🔹 Tipos */
+.toast.success { background-color: #28a745; }
+.toast.error { background-color: #dc3545; }
+.toast.info { background-color: #007bff; }
+
+
 
 /* Responsive */
 @media (max-width: 480px) {
