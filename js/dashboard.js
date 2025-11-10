@@ -566,6 +566,7 @@ document.addEventListener("DOMContentLoaded", () => {
         idVehiculo: parseInt(selectVehiculo.value),
         fechaInicio: document.getElementById("fechaInicio").value,
         fechaFin: document.getElementById("fechaFin").value,
+        observaciones: document.getElementById("observaciones").value || null,
       };
 
       try {

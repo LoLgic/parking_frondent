@@ -62,13 +62,20 @@
     <div class="dashboard">
         <!-- Sidebar de navegación -->
         <aside class="sidebar">
-            <nav>
-                <a href="#" class="nav-link active" data-section="vehiculos"><i
-                        class="fas fa-car-side"></i>Vehículos</a>
-                <a href="#" class="nav-link" data-section="reservas"><i class="fa-solid fa-ticket"></i>Reservas</a>
+            <nav class="sidebar-container">
+                <div class="item-sidevar">
+                    <a href="#" class="nav-link active" data-section="vehiculos"><i
+                            class="fas fa-car-side"></i>Vehículos</a>
+                    <a href="#" class="nav-link" data-section="reservas"><i class="fa-solid fa-ticket"></i>Reservas</a>
+                    <!--
                 <a href="#" class="nav-link" data-section="pagos"><i class="fa-solid fa-coins"></i>Pagos</a>
-                <a href="#"><i class="fa-solid fa-gear"></i>Ajustes</a>
-                <a href="login.html" class="sigout"><i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
+                -->
+                    <a href="#"><i class="fa-solid fa-gear"></i>Ajustes</a>
+                </div>
+                <div class="item-cerrar-sesion">
+                    <a href="login.html" class="sigout"><i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
+                </div>
+
             </nav>
         </aside>
 
@@ -133,7 +140,7 @@
                                 <button id="dropdownButtonReserva" class="dropdown-button-reserva">
                                     Todos <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
                                 </button>
-                                 
+
                                 <div id="dropdownMenuReserva" class="dropdown-menu-reserva">
                                     <div class="dropdown-item-reserva selected" data-value="todos">Todos</div>
                                     <div class="dropdown-item-reserva" data-value="pendiente">Pendiente</div>
@@ -149,10 +156,6 @@
                         <button id="btnAgregarReserva" class="btn-agregar-reserva">
                             <i class="fa-solid fa-plus"></i> Crear reserva
                         </button>
-                        <!--
-                        <button id="btnAgregarReserva" class="btn-agregar">
-                            <i class="fa-solid fa-plus"></i> Crear reserva
-                        </button> -->
                     </div>
 
                     <!-- 🔹 Lista de Reservas -->
@@ -167,10 +170,12 @@
 
 
             <!-- Sección Pagos -->
+            <!-- 
             <section class="section pagos-section" id="sectionPagos" hidden style="display: none;">
                 <h1>Pagos</h1>
                 <p>Consulta tus métodos de pago y transacciones.</p>
-            </section>
+            </section>  
+            -->
         </main>
 
 
@@ -206,28 +211,42 @@
         </div>
 
         <!-- 🔹 Modal Nueva Reserva -->
+        <!-- 🔹 Modal Nueva Reserva -->
         <div id="modalReserva" class="modal">
             <div class="modal-content">
                 <span class="close-btn" id="closeModal">&times;</span>
                 <h2>Crear nueva reserva</h2>
 
-                <form id="formReserva">
-                    <label for="idVehiculo">Vehículo</label>
-                    <select id="idVehiculo" name="idVehiculo" required>
-                        <option value="">Seleccione su vehículo</option>
-                        <!-- Se llenará dinámicamente desde la API -->
-                    </select>
+                <form id="formReserva" class="form-reserva">
+                    <div class="form-group">
+                        <label for="idVehiculo">Vehículo</label>
+                        <select id="idVehiculo" name="idVehiculo" required>
+                            <option value="">Seleccione su vehículo</option>
+                            <!-- Se llenará dinámicamente desde la API -->
+                        </select>
+                    </div>
 
-                    <label for="fechaInicio">Fecha inicio</label>
-                    <input type="datetime-local" id="fechaInicio" name="fechaInicio" required />
+                    <div class="form-group">
+                        <label for="fechaInicio">Fecha inicio</label>
+                        <input type="datetime-local" id="fechaInicio" name="fechaInicio" required />
+                    </div>
 
-                    <label for="fechaFin">Fecha fin</label>
-                    <input type="datetime-local" id="fechaFin" name="fechaFin" required />
+                    <div class="form-group">
+                        <label for="fechaFin">Fecha fin</label>
+                        <input type="datetime-local" id="fechaFin" name="fechaFin" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea id="observaciones" name="observaciones" rows="3"
+                            placeholder="Escribe alguna observación (opcional)"></textarea>
+                    </div>
 
                     <button type="submit" class="btn-registrar">Registrar reserva</button>
                 </form>
             </div>
         </div>
+
     </div>
 
     <!-- OVERLAY DE BÚSQUEDA (para móviles, fuera del layout principal) -->

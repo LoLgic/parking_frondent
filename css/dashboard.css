@@ -184,7 +184,7 @@
 .sidebar nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 140px;
 }
 
 .sidebar i {
@@ -452,6 +452,7 @@
   font-weight: var(--font-weight-bold);
   color: var(--bg-alt);
   color: var(--text-primary);
+  color: var(--bg);
 }
 
 .vehiculos-titulo,
@@ -465,8 +466,9 @@
 .reserva-descripcion {
   color: var(--bg-alt-dark);
   font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
   margin-top: 0.2rem;
-  width: 650px;
+  width: 930px;
 }
 
 .btn-agregar-vehiculo, .btn-agregar-reserva {
@@ -528,9 +530,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 180px;
   transition: all 0.2s ease-in-out;  
-  /*width: 100%;*/
+  width: 100%;
 }
 
 .dropdown-button-reserva:hover {
@@ -1104,7 +1105,7 @@
 #formReserva label {
   display: block;
   margin-top: 10px;
-  font-weight: bold;
+  font-weight: var(-);
 }
 
 #formReserva input {
@@ -1174,6 +1175,28 @@
 .toast.success { background-color: #28a745; }
 .toast.error { background-color: #dc3545; }
 .toast.info { background-color: #007bff; }
+
+
+/* Estilos consistentes para el textarea del modal */
+#modalReserva textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: none; /* Evita redimensionar manualmente */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+#modalReserva textarea:focus {
+  border-color: #3b82f6; /* azul suave */
+  box-shadow: 0 0 4px rgba(59, 130, 246, 0.3);
+  outline: none;
+}
+
 
 
 
