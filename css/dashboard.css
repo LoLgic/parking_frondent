@@ -45,6 +45,7 @@
   display: inline-block;
 }
 
+
 .user-avatar {
   width: 45px;
   height: 45px;
@@ -508,12 +509,116 @@
   margin: 0;
 }
 
-.select-estado {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--bg-alt-dark);
-  font-size: var(--font-size-base);
+
+/* 🔹 Dropdown de reservas */
+.dropdown-reserva {
+  position: relative;
+  display: inline-block;
 }
+
+/* Botón */
+.dropdown-button-reserva {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 15px;
+  color: var(--bg-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 180px;
+  transition: all 0.2s ease-in-out;  
+  /*width: 100%;*/
+}
+
+.dropdown-button-reserva:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Menú desplegable */
+.dropdown-menu-reserva {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  padding: 6px 0;
+  animation: fadeIn 0.15s ease-in-out;
+}
+
+/* Mostrar menú al abrir */
+.dropdown-reserva.open .dropdown-menu-reserva {
+  padding: 10px 10px;
+  width: 180px;
+  display: block;
+}
+
+/* Items */
+.dropdown-item-reserva {
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #3d3d4e;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-item-reserva:hover {
+  background: var(--bg);
+  color: #111827;
+}
+
+/* Flecha */
+.dropdown-button-reserva .arrow {
+  font-size: 12px;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-reserva.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Seleccionado */
+.dropdown-item-reserva.selected {
+  background: #e9ebef;
+  font-weight: 600;
+  color: var(--bg-dark);
+  position: relative;
+}
+
+.dropdown-item-reserva.selected::after {
+  content: "✓";
+  position: absolute;
+  right: 16px;
+  color: var(--bg-dark);
+  font-weight: bold;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
 
 /* Listado similar al de reservas */
 .vehiculos-list {

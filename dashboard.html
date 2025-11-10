@@ -129,13 +129,21 @@
                         <div class="reserva-filtro">
                             <h3>Filtrar por estado</h3>
 
-                            <select id="filtroReserva" class="select-estado">
-                                <option value="todos" selected>Todos</option>
-                                <option value="pendiente">Pendiente</option>
-                                <option value="confirmada">Confirmada</option>
-                                <option value="cancelada">Cancelada</option>
-                                <option value="expirada">Expirada</option>
-                            </select>
+                            <div class="dropdown-reserva">
+                                <button id="dropdownButtonReserva" class="dropdown-button-reserva">
+                                    Todos <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
+                                </button>
+                                 
+                                <div id="dropdownMenuReserva" class="dropdown-menu-reserva">
+                                    <div class="dropdown-item-reserva selected" data-value="todos">Todos</div>
+                                    <div class="dropdown-item-reserva" data-value="pendiente">Pendiente</div>
+                                    <div class="dropdown-item-reserva" data-value="confirmada">Confirmada</div>
+                                    <div class="dropdown-item-reserva" data-value="cancelada">Cancelada</div>
+                                    <div class="dropdown-item-reserva" data-value="expirada">Expirada</div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <!-- Botón para crear reserva -->
                         <button id="btnAgregarReserva" class="btn-agregar-reserva">

@@ -332,34 +332,70 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -------------------------------
-  // 🔹 RESERVAS (módulo con token)
+  // RESERVAS (módulo con token)
   // -------------------------------
+
   function inicializarReservas() {
     const reservaList = document.getElementById("reservaList");
-    const filtroReserva = document.getElementById("filtroReserva");
     const btnAgregar = document.getElementById("btnAgregarReserva");
     const API_BASE = "http://localhost:8081/api/reservas/mias";
 
-    if (!reservaList || !filtroReserva) {
+    // dropdown
+    const dropdown = document.querySelector(".dropdown-reserva");
+    const dropdownButton = document.getElementById("dropdownButtonReserva");
+    const dropdownMenu = document.getElementById("dropdownMenuReserva");
+    const dropdownItems = document.querySelectorAll(".dropdown-item-reserva");
+
+    if (!reservaList || !dropdown) {
       console.warn("Módulo reservas: elementos no encontrados");
       return;
     }
-    if (filtroReserva.dataset.inicializado === "true") return;
-    filtroReserva.dataset.inicializado = "true";
 
-    // carga inicial
+    if (dropdown.dataset.inicializado === "true") return;
+    dropdown.dataset.inicializado = "true";
+
+    // 🔹 Carga inicial
     cargarReservas();
 
-    filtroReserva.addEventListener("change", async () => {
-      const estado = filtroReserva.value;
-      if (estado === "todos") await cargarReservas();
-      else await cargarReservas(estado.toUpperCase());
+    // 🔹 Comportamiento del dropdown (abre/cierra)
+    dropdownButton.addEventListener("click", () => {
+      dropdown.classList.toggle("open");
+    });
+
+    // 🔹 Cerrar al hacer clic fuera
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
+    });
+
+    // 🔹 Manejar selección de filtro
+    dropdownItems.forEach((item) => {
+      item.addEventListener("click", async () => {
+        // Marcar seleccionado visualmente
+        dropdownItems.forEach((i) => i.classList.remove("selected"));
+        item.classList.add("selected");
+
+        // Actualizar texto del botón
+        dropdownButton.innerHTML = `${item.textContent} <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>`;
+
+        // Cerrar el menú
+        dropdown.classList.remove("open");
+
+        // Obtener valor del filtro
+        const estado = item.dataset.value;
+
+        // Ejecutar la misma lógica que el select original
+        if (estado === "todos") await cargarReservas();
+        else await cargarReservas(estado.toUpperCase());
+      });
     });
 
     btnAgregar?.addEventListener("click", () => {
       showToast("Funcionalidad de creación de reservas próximamente 🚀", "info");
     });
 
+    // -------------------------------
+    // CARGAR RESERVAS
+    // -------------------------------
     async function cargarReservas(estado = null) {
       reservaList.innerHTML = `<p style="color:#777;">Cargando reservas...</p>`;
 
@@ -373,7 +409,10 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const url = estado ? `${API_BASE}/estado/${estado}` : API_BASE;
         const response = await fetch(url, {
-          headers: { Authorization: `Bearer ${tokenNow}`, "Content-Type": "application/json" },
+          headers: {
+            Authorization: `Bearer ${tokenNow}`,
+            "Content-Type": "application/json",
+          },
         });
 
         if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
@@ -392,59 +431,58 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    // -------------------------------
+    // RENDERIZAR TABLA DE RESERVAS
+    // -------------------------------
     function renderReservas(lista) {
-      // Limpiar contenedor
       reservaList.innerHTML = "";
 
-      // Crear tabla
       const table = document.createElement("table");
       table.classList.add("tabla-reservas");
 
-      // Crear encabezado
       table.innerHTML = `
-    <thead>
-      <tr>
-        <th>ID Reserva</th>
-        <th>Estado</th>
-        <th>Placa del Vehículo</th>
-        <th>Código del Espacio</th>
-        <th>Fecha de Inicio</th>
-        <th>Fecha de Fin</th>
-        <th>Observaciones</th>
-        <th>Cancelar</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  `;
+      <thead>
+        <tr>
+          <th>ID Reserva</th>
+          <th>Estado</th>
+          <th>Placa del Vehículo</th>
+          <th>Código del Espacio</th>
+          <th>Fecha de Inicio</th>
+          <th>Fecha de Fin</th>
+          <th>Observaciones</th>
+          <th>Cancelar</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    `;
 
       const tbody = table.querySelector("tbody");
 
-      // Verificar si hay reservas
       if (!lista || lista.length === 0) {
         reservaList.innerHTML = `<p class="sin-reservas">No hay reservas registradas.</p>`;
         return;
       }
 
-      // Llenar filas
       lista.forEach((r) => {
         const fechaInicio = formatearFecha(r.fechaInicio);
         const fechaFin = formatearFecha(r.fechaFin);
 
         const row = document.createElement("tr");
         row.innerHTML = `
-      <td>${r.idReserva}</td>
-      <td><span class="estado ${r.estado.toLowerCase()}">${r.estado}</span></td>
-      <td>${r.placaVehiculo}</td>
-      <td>${r.codigoEspacio}</td>
-      <td>${fechaInicio}</td>
-      <td>${fechaFin}</td>
-      <td>${r.observaciones || "-"}</td>
-      <td class="cancelar">
-        <button class="btn-cancelar" title="Cancelar"><i class="fa-solid fa-square-xmark"></i></button>
-      </td>
-    `;
+        <td>${r.idReserva}</td>
+        <td><span class="estado ${r.estado.toLowerCase()}">${r.estado}</span></td>
+        <td>${r.placaVehiculo}</td>
+        <td>${r.codigoEspacio}</td>
+        <td>${fechaInicio}</td>
+        <td>${fechaFin}</td>
+        <td>${r.observaciones || "-"}</td>
+        <td class="cancelar">
+          <button class="btn-cancelar" title="Cancelar">
+            <i class="fa-solid fa-square-xmark"></i>
+          </button>
+        </td>
+      `;
 
-        // Agregar evento solo si la reserva está pendiente
         if (r.estado.toLowerCase() === "pendiente") {
           row.querySelector(".btn-cancelar").addEventListener("click", () => eliminarReserva(r.idReserva));
         }
@@ -464,18 +502,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const formReserva = document.getElementById("formReserva");
     const selectVehiculo = document.getElementById("idVehiculo");
 
-    // 🔹 Abrir modal
     btnAbrirModal.addEventListener("click", async () => {
       modal.style.display = "block";
-      await cargarVehiculosSelect(); // cargar lista de vehículos
+      await cargarVehiculosSelect();
     });
 
-    // 🔹 Cerrar modal
     btnCerrarModal.addEventListener("click", () => {
       modal.style.display = "none";
     });
 
-    // 🔹 Cerrar al hacer clic fuera del contenido
     window.addEventListener("click", (e) => {
       if (e.target === modal) modal.style.display = "none";
     });
@@ -493,14 +528,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const response = await fetch("http://localhost:8081/api/vehiculos/mios", {
           headers: {
-            "Authorization": `Bearer ${tokenNow}`,
-            "Content-Type": "application/json"
-          }
+            Authorization: `Bearer ${tokenNow}`,
+            "Content-Type": "application/json",
+          },
         });
 
         if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
         const vehiculos = await response.json();
-
 
         selectVehiculo.innerHTML = `<option value="">Seleccione su vehículo</option>`;
 
@@ -544,26 +578,21 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(reserva),
         });
 
-        if (!response.ok) {
-          throw new Error(`Error HTTP ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
 
         showToast("✅ Reserva creada correctamente", "success");
-
-        // Cerrar modal y limpiar formulario
         modal.style.display = "none";
         formReserva.reset();
-
-        // Recargar tabla de reservas
         await cargarReservas();
-
       } catch (error) {
         console.error("Error al crear reserva:", error);
         showToast("❌ Error al crear la reserva", "error");
       }
     });
 
-
+    // -------------------------------
+    // CANCELAR RESERVA
+    // -------------------------------
     async function eliminarReserva(idReserva) {
       try {
         const token = localStorage.getItem("token");
@@ -576,33 +605,35 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
-        if (!response.ok) {
-          throw new Error(`Error HTTP ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
 
         mostrarToast("✅ Reserva cancelada exitosamente.", "success");
 
-        // Esperar un momento y actualizar lista
-        setTimeout(async () => {
-          await cargarReservas();
-        }, 800);
-
+        setTimeout(async () => await cargarReservas(), 800);
       } catch (error) {
         console.error("Error al eliminar reserva:", error.message || error);
         mostrarToast("❌ No se pudo cancelar la reserva.", "error");
       }
     }
 
-
+    // -------------------------------
+    // UTILIDAD: FORMATEAR FECHA
+    // -------------------------------
     function formatearFecha(fechaIso) {
       const fecha = new Date(fechaIso);
-      return fecha.toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short", hour12: false });
+      return fecha.toLocaleString("es-CO", {
+        dateStyle: "medium",
+        timeStyle: "short",
+        hour12: false,
+      });
     }
-  } // fin inicializarReservas
+  }
+
+  // fin inicializarReservas
 
   // -------------------------------
   // ✅ TOAST DE NOTIFICACIÓN
